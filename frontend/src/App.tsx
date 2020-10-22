@@ -1,8 +1,5 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Link from "@material-ui/core/Link";
+import { Box, Container, Link, Typography } from "@material-ui/core";
 import Header from "./Header";
 import Content from "./Content";
 import Footer from "./Footer";
@@ -30,7 +27,7 @@ export default function App() {
         <Footer />
         <Container maxWidth="sm">
           <Box my={4}>
-            <Typography variant="h4" component="h1" gutterBottom>
+            <Typography color="primary" variant="h4" component="h1" gutterBottom>
               Create React App v4-beta example
             </Typography>
             <Copyright />
