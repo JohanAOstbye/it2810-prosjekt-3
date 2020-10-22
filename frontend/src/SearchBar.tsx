@@ -2,14 +2,14 @@ import { Typography } from '@material-ui/core';
 import React from 'react';
 import './css/Responsive.css';
 
-function Component() {
+function SearchBar() {
   return (
-    <div className="component">
+    <div className="searchBar">
         <Typography color="secondary" variant="h4">
-          I am a component, look at meeeeee
+          I am a SearchBar! Soon(tm)
         </Typography>
     </div>
   );
 }
 
-export default Component;
+export default SearchBar;

@@ -1,38 +1,16 @@
 import React from "react";
-import { Box, Container, Link, Typography } from "@material-ui/core";
 import Header from "./Header";
 import Content from "./Content";
-import Footer from "./Footer";
+import SideBar from "./SideBar";
 import "./css/Responsive.css";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 export default function App() {
   return (
     <div className="app">
+    <Header />
       <div className="app-content">
-        <Header />
         <Content />
-        <Footer />
-        <Container maxWidth="sm">
-          <Box my={4}>
-            <Typography color="primary" variant="h4" component="h1" gutterBottom>
-              Create React App v4-beta example
-            </Typography>
-            <Copyright />
-          </Box>
-        </Container>
+        <SideBar />
       </div>
     </div>
   );

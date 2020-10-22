@@ -1,11 +1,12 @@
 .app {
     min-height: 100vh;
+    background-color: teal;
 }
 
 .app-content {
     display: flex;
     flex-direction: row;
-    min-height: 100vh;
+    min-height: 84vh;
 }
 
 .sideBar {
@@ -19,13 +20,39 @@
     background-color: goldenrod;
     margin: 0.5rem;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: stretch;
-    align-items: stretch;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
     flex-grow: 1;
 }
 
+.searchBar {
+    max-height: 2.5rem;
+    background-color: pink;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+.componentContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: green;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    justify-content: space-evenly;
+    width: 90%;
+}
+
+.generationCard {
+    padding: 3rem;
+    margin: 1rem;
+    width: 10rem;
+    height: 10rem;
+    background-color: lightgoldenrodyellow;
+    border-radius: 4rem;
+    border: 5px black solid;
+}
 .component {
     flex-basis: auto;
     background-color: green;
