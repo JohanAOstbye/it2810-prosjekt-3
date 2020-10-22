@@ -1,0 +1,14 @@
+.sideBar {
+  background-color: red;
+}
+
+.sideBar-content {
+  text-align: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+h3 {
+  font-size: calc(10px + 2vmin);
+  font-weight: normal;
+}

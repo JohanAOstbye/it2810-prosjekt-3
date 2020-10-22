@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import './css/SideBar.css';
 import './css/Responsive.css';
 
-function Footer() {
+function Header() {
   return (
     <div className="sideBar">
       <div className="sideBar-content">
-        <h3>Laget av Johan, Sebastian og Christoffer</h3>
+        <h2>Pokébase</h2>
       </div>
     </div>
   );
 }
 
-export default Footer;
+export default Header;

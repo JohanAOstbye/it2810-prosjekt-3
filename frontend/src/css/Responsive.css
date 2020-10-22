@@ -1,0 +1,34 @@
+.app {
+    min-height: 100vh;
+}
+
+.app-content {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+.sideBar {
+    min-height: 100vh;
+    display: flex;
+    min-width: 15rem;
+}
+
+
+.content {
+    background-color: goldenrod;
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: stretch;
+    align-items: stretch;
+    flex-grow: 1;
+}
+
+.component {
+    flex-basis: auto;
+    background-color: green;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
