@@ -27,7 +27,7 @@ const main = async () => {
   server.applyMiddleware({ app });
   app.listen({ port: 3333 }, () =>
     console.log(
-      `🚀 Server ready and listening at ==> mongodb+srv://admin:safepswrd@pokedb.chnl7.mongodb.net/Pokedb?retryWrites=true&w=majority${server.graphqlPath}`
+      `🚀 Server ready and listening at http://localhost:3333${server.graphqlPath}`
     )
   );
 };
