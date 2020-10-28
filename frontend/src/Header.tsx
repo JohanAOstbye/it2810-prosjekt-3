@@ -3,6 +3,7 @@ import './css/SideBar.css';
 import './css/Responsive.css';
 import { AppBar, Toolbar, Box, Button, Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import SearchBar from './SearchBar';
 
 
 const Header_OLD = () => {
@@ -41,6 +42,7 @@ const Header = () => {
       <Toolbar>
         <Typography className={classes.typographyStyles}>Pokébase</Typography>
       </Toolbar>
+      <SearchBar />
     </AppBar>
   );
 }

@@ -4,22 +4,6 @@ import './css/Responsive.css';
 import { AppBar, Box, Button, Container, List, ListItem, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
-function Footer_OLD() {
-  return (
-    <div className="sideBar">
-      <div className="sideBar-content">
-        <Container>
-          <Box my={4}>
-            <Typography color="primary" variant="h5">
-              Laget av Johan, Sebastian og Christoffer
-            </Typography>
-          </Box>
-        </Container>
-      </div>
-    </div>
-  );
-}
-
 const useStyles = makeStyles(() => ({
   typographyStyles: {
     color: "white"
@@ -33,8 +17,40 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     paddingTop: "1rem"
+  },
+  sideBarList: {
+    color: "yellow",
+    flexGrow: 1,
   }
 }));
+
+function SideBarList(){
+  const classes = useStyles();
+  return (
+    <Typography className={classes.sideBarList}>
+      <List>
+        <ListItem>All Pokémon</ListItem>
+        <ListItem>Generation 1</ListItem>
+        <ListItem>Generation 2</ListItem>
+        <ListItem>Generation 3</ListItem>
+      </List>
+      <List>
+        <ListItem>PokeAPI</ListItem>
+        <ListItem>TEst 2</ListItem>
+        <ListItem>Test 3</ListItem>
+      </List>
+    </Typography>
+  );
+}
+
+function Footer(){
+  const classes = useStyles();
+  return (
+    <Typography className={classes.typographyStyles} variant="h5">
+      Laget av Johan, Sebastian og Christoffer (c)
+    </Typography>
+  );
+}
 
 const SideBar = () => {
   const classes = useStyles();
@@ -44,16 +60,9 @@ const SideBar = () => {
         <Typography className={classes.typographyStyles} variant="h3">
           Links
         </Typography>
-        <Typography>
-          <List>
-            <ListItem>1</ListItem>
-            <ListItem>2</ListItem>
-            <ListItem>3</ListItem>
-          </List>
-        </Typography>
-        <Typography className={classes.typographyStyles} variant="h5">
-          Laget av Johan, Sebastian og Christoffer
-        </Typography>
+
+        <SideBarList/>
+        <Footer/>
       </Toolbar>
     </AppBar>
   );

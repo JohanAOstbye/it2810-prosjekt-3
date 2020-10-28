@@ -9,11 +9,6 @@ function ComponentContainer() {
       <GenerationCard />
       <GenerationCard />
       <GenerationCard />
-      <GenerationCard />
-      <GenerationCard />
-      <GenerationCard />
-      <GenerationCard />
-      <GenerationCard />
     </div>
   );
 }
