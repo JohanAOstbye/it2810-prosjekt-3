@@ -5,12 +5,14 @@
 /frontend/node_modules
 /.pnp
 .pnp.js
+.vscode
 
 # testing
 /coverage
 
 # production
 /build
+/backend/dist
 
 # misc
 .DS_Store
