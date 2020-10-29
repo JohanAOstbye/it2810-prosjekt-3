@@ -11,12 +11,13 @@ const useStyles = makeStyles(() => ({
   sideBar: {
     margin: "0.5rem",
     display: "flex",
-    maxWidth: "15rem"
+    maxWidth: "10rem"
   },
   toolBar: {
     display: "flex",
     flexDirection: "column",
-    paddingTop: "1rem"
+    paddingTop: "1rem",
+    padding: "0.5rem"
   },
   sideBarList: {
     color: "yellow",
@@ -36,8 +37,6 @@ function SideBarList(){
       </List>
       <List>
         <ListItem>PokeAPI</ListItem>
-        <ListItem>TEst 2</ListItem>
-        <ListItem>Test 3</ListItem>
       </List>
     </Typography>
   );
@@ -46,7 +45,7 @@ function SideBarList(){
 function Footer(){
   const classes = useStyles();
   return (
-    <Typography className={classes.typographyStyles} variant="h5">
+    <Typography className={classes.typographyStyles} >
       Laget av Johan, Sebastian og Christoffer (c)
     </Typography>
   );
@@ -57,7 +56,7 @@ const SideBar = () => {
   return (
     <AppBar position="static" className={classes.sideBar}>
       <Toolbar className={classes.toolBar}>
-        <Typography className={classes.typographyStyles} variant="h3">
+        <Typography className={classes.typographyStyles} variant="h5">
           Links
         </Typography>
 

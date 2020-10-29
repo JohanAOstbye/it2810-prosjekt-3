@@ -28,9 +28,7 @@
 }
 
 .searchBar {
-    max-height: 2.5rem;
-    background-color: white;
-    margin: 0.5rem;
+    background-color: purple;
     padding: 0.5rem;
 }
 
@@ -60,6 +58,4 @@
 .component {
     flex-basis: auto;
     background-color: green;
-    margin: 0.5rem;
-    padding: 0.5rem;
 }

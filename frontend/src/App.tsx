@@ -4,6 +4,39 @@ import Content from "./Content";
 import SideBar from "./SideBar";
 import "./css/Responsive.css";
 
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+} from "@apollo/client";
+
+
+const client = new ApolloClient({
+  uri: "mongodb+srv://admin:safepswrd@pokedb.chnl7.mongodb.net/Pokedb?retryWrites=true&w=majority", //mongodb+srv://admin:safepswrd@pokedb.chnl7.mongodb.net/Pokedb?retryWrites=true&w=majority", //Dogs: "https://71z1g.sse.codesandbox.io/", //Currency: 'https://48p1r2roz4.sse.codesandbox.io',
+  cache: new InMemoryCache()
+});
+
+export default function App() {
+  return (
+    
+    <ApolloProvider client={client}>
+      <div className="app">
+        <Header />
+        <div className="app-content">
+          <Content />
+          <SideBar />
+        </div>
+      </div>
+    </ApolloProvider>
+  );
+}
+
+
+
+
+
+
+/*
 import { configureStore } from '@reduxjs/toolkit'
 
 function Counter() {
@@ -53,24 +86,4 @@ const increment = () => {
 }
 store.dispatch(increment())
 console.log(store.getState())
-
-
-
-
-
-
-
-
-
-export default function App() {
-  return (
-    <div className="app">
-      <Header />
-      <div className="app-content">
-        <Counter />
-        <Content />
-        <SideBar />
-      </div>
-    </div>
-  );
-}
+*/

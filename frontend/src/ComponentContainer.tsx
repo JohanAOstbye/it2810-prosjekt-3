@@ -6,9 +6,6 @@ import GenerationCard from './GenerationCard';
 function ComponentContainer() {
   return (
     <div className="componentContainer">
-      <GenerationCard />
-      <GenerationCard />
-      <GenerationCard />
     </div>
   );
 }

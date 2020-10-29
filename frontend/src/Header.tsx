@@ -25,24 +25,30 @@ const Header_OLD = () => {
 const useStyles = makeStyles(() => ({
   headerContainer: {
     minHeight: "15vh",
+    padding: "0"
   },
   contentContainer: {
   },
   typographyStyles: {
     color: "white",
-    fontSize: 100,
+    fontSize: 80,
+    flexGrow: 1
   },
+  toolBarStyles: {
+    display: "flex",
+    flexDirection: "row"
+  }
 
 }));
 
 const Header = () => {
   const classes = useStyles();
   return (
-    <AppBar position="static" className={classes.headerContainer}>
-      <Toolbar>
+    <AppBar position="static" className={classes.headerContainer} color="primary" color-variant="dark">
+      <Toolbar className={classes.toolBarStyles}>
         <Typography className={classes.typographyStyles}>Pokébase</Typography>
+        <SearchBar />
       </Toolbar>
-      <SearchBar />
     </AppBar>
   );
 }
