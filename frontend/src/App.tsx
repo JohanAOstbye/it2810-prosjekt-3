@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Header from "./Header";
-import Content from "./Content";
-import SideBar from "./SideBar";
+import Header from "./nav/Header";
+import Content from "./body/Content";
+import SideBar from "./sidebar/SideBar";
 import "./css/Responsive.css";
 
 import {
@@ -12,7 +12,7 @@ import {
 
 
 const client = new ApolloClient({
-  uri: "mongodb+srv://admin:safepswrd@pokedb.chnl7.mongodb.net/Pokedb?retryWrites=true&w=majority", //mongodb+srv://admin:safepswrd@pokedb.chnl7.mongodb.net/Pokedb?retryWrites=true&w=majority", //Dogs: "https://71z1g.sse.codesandbox.io/", //Currency: 'https://48p1r2roz4.sse.codesandbox.io',
+  uri: "http://localhost:3333/graphql", 
   cache: new InMemoryCache()
 });
 

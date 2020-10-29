@@ -1,15 +1,15 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
-import './css/Responsive.css';
+import './../css/Responsive.css';
 
-function Component() {
+function GenerationCard() {
   return (
-    <div className="component">
+    <div className="generationCard">
         <Typography color="secondary" variant="h4">
-          I am a component, look at meeeeee
+          Gen XY
         </Typography>
     </div>
   );
 }
 
-export default Component;
+export default GenerationCard;

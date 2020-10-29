@@ -17,19 +17,13 @@
 }
 
 .content {
-    background-color: goldenrod;
     margin: 0.5rem;
-    padding: 2rem;
+    padding-top: 1rem;
     display: flex;
     flex-direction: column;
     align-content: center;
     align-items: center;
     flex-grow: 1;
-}
-
-.searchBar {
-    background-color: purple;
-    padding: 0.5rem;
 }
 
 .componentContainer {

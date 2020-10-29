@@ -29,6 +29,8 @@
   },
   "dependencies": {
     "@typegoose/typegoose": "^7.4.1",
+    "@types/mongodb": "^3.5.32",
+    "@types/mongoose": "^5.7.36",
     "apollo-server-express": "^2.18.2",
     "class-validator": "^0.12.2",
     "compression": "^1.7.4",

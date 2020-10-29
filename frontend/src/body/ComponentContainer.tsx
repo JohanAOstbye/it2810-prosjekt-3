@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
-import './css/Responsive.css';
-import GenerationCard from './GenerationCard';
+import './../css/Responsive.css';
+import GenerationCard from './body/GenerationCard';
 
 function ComponentContainer() {
   return (
