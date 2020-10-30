@@ -1,8 +1,7 @@
 import { InputType, Field, ID, Int } from "type-graphql";
-import { Pokemon } from "../../entities/Pokemon";
 
 @InputType()
-export class PokemonInput implements Partial<Pokemon> {
+export class PokemonInput {
   @Field(() => Int)
   pokemonID: number;
 
@@ -26,4 +25,28 @@ export class PokemonInput implements Partial<Pokemon> {
 
   @Field(() => [String])
   types: String[];
+}
+
+@InputType()
+export class PokemonFilter {
+  @Field(() => Int)
+  maxPokemonId?: number;
+
+  @Field(() => Int)
+  minPokemonId?: number;
+
+  @Field(() => String)
+  name?: String;
+  
+  @Field(() => Int)
+  maxWeight?: number;
+  
+  @Field(() => Int)
+  minWeight?: number;
+  
+  @Field(() => Int)
+  maxHeight?: number;
+  
+  @Field(() => Int)
+  minHeight?: number;
 }
