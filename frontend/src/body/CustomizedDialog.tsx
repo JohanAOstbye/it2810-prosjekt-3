@@ -9,12 +9,10 @@ import {
   withStyles,
   makeStyles,
 } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import DenseTable from "./DenseTable";
+
+
+/* Styles */
 
 const useStyles = makeStyles({
   pokemonCard: {
@@ -59,6 +57,7 @@ const styles = (theme) => ({
   },
 });
 
+
 /* Queries */
 
 const GET_SINGLE_POKEMON = gql`
@@ -74,6 +73,7 @@ query ($id: String!){
   }
 }
 `;
+
 
 /* Components */
 
@@ -100,48 +100,13 @@ function PokemonCard(props) {
   return (
     <div className={classes.pokemonCard}>
       <Typography variant="h4">{props.pokemonID}</Typography>
-      <Typography variant="h5">{props.name}</Typography>
+      <Typography variant="h6">{props.name}</Typography>
       <img
         className={classes.pokemonCardImage}
         src={props.image}
         width="150px"
       />
     </div>
-  );
-}
-
-
-/* DenseTable */
-
-// createData, helping function to create TableRows
-function createData(
-  name: string,
-  value: string
-) {
-  return { name, value};
-}
-
-// DenseTable, takes in a parameter array of rows, returns a Dense Table
-function DenseTable(props) {
-  const classes = useStyles();
-
-  return (
-    <TableContainer component={Paper}>
-      <Table size="small" aria-label="a dense table">
-        <TableBody>
-          {props.rows.map((row: any) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                <Typography variant="body1">{row.name}</Typography>
-              </TableCell>
-              <TableCell align="right">
-                <Typography variant="body1">{row.value}</Typography>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
   );
 }
 
@@ -205,13 +170,19 @@ const DialogContent = withStyles((theme) => ({
   },
 }))(MuiDialogContent);
 
+
+// createData, helping function to create TableRows
+function createData(name: string, value: string) {
+  return { name, value };
+}
+
 //DialogPokemon, return the fetched pokemon information
 function DialogPokemon(props) {
   const classes = useStyles();
   
   const rows = [
     createData("Name", props.pokemon.name),
-    createData("Base experience", props.pokemon.base_experience),
+    createData("Experience", props.pokemon.base_experience),
     createData("Height", props.pokemon.height),
     createData("Weight", props.pokemon.weight),
   ];
