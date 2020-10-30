@@ -1,7 +1,8 @@
 import { ObjectType, Field, ID } from "type-graphql";
 import { prop as Property, getModelForClass } from "@typegoose/typegoose";
-import { Pokemon } from "./Pokemon";
-import { __Type } from "graphql";
+import { Pokemon } from "./Pokemon"
+import relayTypes from "./../utils/Paginated-response"
+
 
 @ObjectType({ description: "The User model" })
 export class User {
@@ -23,5 +24,8 @@ export class User {
   @Property({ type: () => Pokemon, default: [] })
   pokedex: Pokemon[] = [];
 }
+
+@ObjectType()
+export class UserResponse extends relayTypes<User>(User) { }
 
 export const UserModel = getModelForClass(User);

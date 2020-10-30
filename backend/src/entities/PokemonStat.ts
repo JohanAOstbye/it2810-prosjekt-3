@@ -25,5 +25,4 @@ export class PokemonStat {
   @Property({ required: true })
   effort: number;
 }
-
 export const PokemonStatModel = getModelForClass(PokemonStat);

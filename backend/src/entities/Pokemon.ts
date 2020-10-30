@@ -1,10 +1,10 @@
 import { ObjectType, Field, ID, Int } from "type-graphql";
-import { prop as Property, getModelForClass, plugin } from "@typegoose/typegoose";
-import { PokemonStat, PokemonStatModel } from "./PokemonStat";
+import { prop as Property, getModelForClass} from "@typegoose/typegoose";
+import { PokemonStat } from "./PokemonStat";
 import { Ref } from "../types";
-// import * as autopopulate from 'mongoose-autopopulate';
+import relayTypes from "./../utils/Paginated-response"
 
-// @plugin(require(autopopulate as any))
+
 @ObjectType({ description: "The Pokemon model" })
 export class Pokemon {
   @Field(() => ID)
@@ -45,9 +45,11 @@ export class Pokemon {
   //@Field(() => [PokemonStat])
   @Property({
     ref: 'PokemonStat',
-    // autopopulate: { maxDepth: 1},
   })
   stats: Ref<PokemonStat>[];
 }
+
+@ObjectType()
+export class PokemonResponse extends relayTypes<Pokemon>(Pokemon) { }
 
 export const PokemonModel = getModelForClass(Pokemon);
