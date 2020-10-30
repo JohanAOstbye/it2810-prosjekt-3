@@ -29,24 +29,24 @@ export class PokemonInput {
 
 @InputType()
 export class PokemonFilter {
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   maxPokemonId?: number;
 
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   minPokemonId?: number;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   name?: String;
   
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   maxWeight?: number;
   
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   minWeight?: number;
   
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   maxHeight?: number;
   
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   minHeight?: number;
 }

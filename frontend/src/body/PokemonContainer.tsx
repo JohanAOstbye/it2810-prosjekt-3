@@ -27,14 +27,14 @@ const useStyles = makeStyles(() => ({
 
 //Return all pokemon
 const RETURN_ALL_POKEMON = gql`
-  query {
-    returnAllPokemon {
-      id
-      pokemonID
-      name
-      image
-    }
-  }
+query {returnAllPokemon(orderby: "pokemonID", filter: {}, data: {first:450}){
+  page{
+    edges{
+      node{id, pokemonID, name, image}
+    	}
+  	}
+	}
+}
 `;
 
 /* Components */
@@ -47,16 +47,16 @@ function PokemonContainer() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error ${error.message}</p>;
 
-  //console.log(data.returnAllPokemon[0]);
+  console.log(data.returnAllPokemon.page.edges);
 
   return (
     <div className={classes.pokemonContainer}>
-      {data.returnAllPokemon.map(({ id, pokemonID, name, image }) => (
+      {data.returnAllPokemon.page.edges.map(({ node }) => (
         <CustomizedDialog
-          id={id}
-          pokemonID={pokemonID}
-          name={name}
-          image={image}
+          id={node.id}
+          pokemonID={node.pokemonID}
+          name={node.name}
+          image={node.image}
         />
       ))}
     </div>

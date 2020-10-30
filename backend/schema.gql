@@ -57,13 +57,13 @@ type PokemonEdge {
 }
 
 input PokemonFilter {
-  maxHeight: Int!
-  maxPokemonId: Int!
-  maxWeight: Int!
-  minHeight: Int!
-  minPokemonId: Int!
-  minWeight: Int!
-  name: String!
+  maxHeight: Int
+  maxPokemonId: Int
+  maxWeight: Int
+  minHeight: Int
+  minPokemonId: Int
+  minWeight: Int
+  name: String
 }
 
 input PokemonInput {
