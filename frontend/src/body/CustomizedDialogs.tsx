@@ -1,12 +1,12 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import React, { useState } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import { useQuery, gql, NetworkStatus } from "@apollo/client";
 
 const styles = (theme) => ({
   root: {
@@ -14,12 +14,38 @@ const styles = (theme) => ({
     padding: theme.spacing(2),
   },
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
 });
+
+/* Queries */
+
+const GET_SINGLE_POKEMON = gql`
+query ($id: String!){
+  returnSinglePokemon(id: $id) {
+    id
+    name
+  }
+}
+`;
+
+function SinglePokemonQuery() {
+  const { loading, error, data } = useQuery(
+    GET_SINGLE_POKEMON,
+    {
+      variables: { id:"5f9b1c6c54664429f472fae0" }
+    }
+  );
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error ${error.message}</p>;
+  
+  return <CustomizedDialogs pokemon={data.returnSinglePokemon} />;
+};
+
 
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
@@ -27,8 +53,12 @@ const DialogTitle = withStyles(styles)((props) => {
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <div>X</div>
+        <IconButton
+          aria-label="close"
+          className={classes.closeButton}
+          onClick={onClose}
+        >
+          <div>x</div>
         </IconButton>
       ) : null}
     </MuiDialogTitle>
@@ -41,7 +71,8 @@ const DialogContent = withStyles((theme) => ({
   },
 }))(MuiDialogContent);
 
-export default function CustomizedDialogs() {
+
+function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -53,30 +84,20 @@ export default function CustomizedDialogs() {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open dialog
-      </Button>
-      
+      <PokemonCard onClick={handleClickOpen}></PokemonCard>
+
       <Dialog onClose={handleClose} open={open}>
-        <DialogTitle onClose={handleClose}>
-          This is a placeholder!
-        </DialogTitle>
+        <DialogTitle onClose={handleClose}>{props.pokemon.name}</DialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-            in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-          </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-            lacus vel augue laoreet rutrum faucibus dolor auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-            auctor fringilla.
-          </Typography>
+        {props.pokemon.name}{props.pokemon.name}{props.pokemon.name}{props.pokemon.name}
         </DialogContent>
       </Dialog>
+
     </div>
   );
 }
+
+
+
+
+export default SinglePokemonQuery;

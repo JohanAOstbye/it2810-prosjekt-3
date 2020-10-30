@@ -1,25 +1,24 @@
 import React, { useState } from "react";
-import Pokemon from "./Pokemon";
+import PokemonContainer from "./PokemonContainer";
 import "./../css/Responsive.css";
 import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import CustomizedDialogs from "./CustomizedDialogs";
+import SinglePokemonQuery from "./CustomizedDialogs";
 
 const useStyles = makeStyles(() => ({
   typographyStyles: {
     color: "white",
   },
-  /*
   subHeader: {
-    display: "flex",
+  /*display: "flex",
     flexDirection: "row",
-    width: "100%"
+    width: "100%"*/
   },
   subHeaderText: {
     //flexGrow: 1
-  },*/
+  },
 }));
 
 function WelcomeComponent() {
@@ -37,10 +36,11 @@ function Content() {
   return (
     <div className="content">
       <WelcomeComponent />
-      <CustomizedDialogs />
-      <Pokemon />
+      <PokemonContainer/>
     </div>
   );
 }
+
+/*<SinglePokemonQuery />*/
 
 export default Content;
