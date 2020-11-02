@@ -51,7 +51,7 @@ function PokemonContainer() {
 
   return (
     <div className={classes.pokemonContainer}>
-      {data.returnAllPokemon.page.edges.map(({ node }) => (
+      {data.returnAllPokemon.page.edges.map(({ node }: any) => (
         <CustomizedDialog
           id={node.id}
           pokemonID={node.pokemonID}

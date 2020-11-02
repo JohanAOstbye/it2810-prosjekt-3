@@ -9,7 +9,7 @@ import { Typography } from "@material-ui/core";
 
 
 // DenseTable, takes in a parameter array of rows, returns a Dense Table
-function DenseTable(props) {
+function DenseTable(props: any) {
 
   return (
     <TableContainer component={Paper}>
