@@ -76,7 +76,7 @@ query ($id: String!){
 /* Components */
 
 // Returns a DialogPokemon component with the pokemon-parameteres fetched.
-function SinglePokemonQuery(props) {
+function SinglePokemonQuery(props: any) {
   const { loading, error, data } = useQuery(
     GET_SINGLE_POKEMON,
     {
@@ -92,7 +92,7 @@ function SinglePokemonQuery(props) {
 
 
 // PokemonCard, returns a pokemon-preview
-function PokemonCard(props) {
+function PokemonCard(props: any) {
   const classes = useStyles();
 
   return (
@@ -112,7 +112,7 @@ function PokemonCard(props) {
 /* Dialogs */
 
 // CustomizedDialog, returns the PokemonCard-preview, and the dialog when preview is clicked
-function CustomizedDialog(props) {
+function CustomizedDialog(props: any) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -143,7 +143,7 @@ function CustomizedDialog(props) {
 }
 
 // DialogTitle, returns a Custom Title
-function DialogTitle(props){
+function DialogTitle(props: any){
   const { children, onClose, ...other } = props;
   const classes = useStyles();
   return (
@@ -176,7 +176,7 @@ function createData(name: string, value: string) {
 }
 
 //DialogPokemon, return the fetched pokemon information
-function DialogPokemon(props) {
+function DialogPokemon(props: any) {
   const classes = useStyles();
   
   const rows = [
