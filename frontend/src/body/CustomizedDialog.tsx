@@ -5,6 +5,7 @@ import MuiDialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { useQuery, gql, NetworkStatus } from "@apollo/client";
+import theme from "./../theme";
 import {
   withStyles,
   makeStyles,
@@ -42,9 +43,6 @@ const useStyles = makeStyles({
     border: "1px solid black",
     borderRadius: "1rem",
   },
-});
-
-const styles = (theme) => ({
   root: {
     margin: 0,
     padding: theme.spacing(2),
@@ -145,8 +143,9 @@ function CustomizedDialog(props) {
 }
 
 // DialogTitle, returns a Custom Title
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
+function DialogTitle(props){
+  const { children, onClose, ...other } = props;
+  const classes = useStyles();
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...other}>
       <Typography variant="h6">{children}</Typography>
@@ -161,7 +160,7 @@ const DialogTitle = withStyles(styles)((props) => {
       ) : null}
     </MuiDialogTitle>
   );
-});
+}
 
 // DialogContent, returns a Custom Dialog to pop up
 const DialogContent = withStyles((theme) => ({
