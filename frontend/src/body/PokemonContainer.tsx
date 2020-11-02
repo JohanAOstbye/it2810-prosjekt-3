@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
 
 //Return all pokemon
 const RETURN_ALL_POKEMON = gql`
-query {returnAllPokemon(orderby: "pokemonID", filter: {}, data: {first:450}){
+query {returnAllPokemon(orderby: "pokemonID", filter: {}, data: {first:4}){
   page{
     edges{
       node{id, pokemonID, name, image}
