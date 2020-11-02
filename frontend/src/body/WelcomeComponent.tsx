@@ -1,5 +1,4 @@
 import React from "react";
-import "./../css/Responsive.css";
 import { makeStyles } from "@material-ui/styles";
 import {
   Typography,

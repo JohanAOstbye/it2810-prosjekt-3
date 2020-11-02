@@ -2,14 +2,28 @@ import React, { useState } from "react";
 import Header from "./nav/Header";
 import Content from "./body/Content";
 import SideBar from "./sidebar/SideBar";
-import "./css/Responsive.css";
-
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
+import { makeStyles } from "@material-ui/core";
 
+/* Styles */
+
+const useStyles = makeStyles(() => ({
+  app: {
+    minHeight: "100vh",
+    backgroundColor: "teal",
+    display: "flex",
+    flexDirection: "column",
+  },
+  appContent: {
+    display: "flex",
+    flexDirection: "row",
+    flexGrow: 1,
+  }
+}));
 
 const client = new ApolloClient({
   uri: "http://localhost:3333/graphql", 
@@ -17,12 +31,13 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+  const classes = useStyles();
   return (
     
     <ApolloProvider client={client}>
-      <div className="app">
+      <div className={classes.app}>
         <Header />
-        <div className="app-content">
+        <div className={classes.appContent}>
           <Content />
           <SideBar />
         </div>

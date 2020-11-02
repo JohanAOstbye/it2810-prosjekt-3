@@ -1,6 +1,5 @@
 import React, { Component, useState } from "react";
 import CustomizedDialog from "./CustomizedDialog";
-import "./../css/Responsive.css";
 import { Typography } from "@material-ui/core";
 import { useQuery, gql, NetworkStatus } from "@apollo/client";
 import {
@@ -72,22 +71,23 @@ function PokemonContainer(props: any) {
   if (error) return <p>Error ${error.message}</p>;*/
 
   console.log(props);
-  console.log(props.length);
+  /*console.log(props.length);
   console.log(props.pokemon);
-  console.log(props.pokemon.page.edges);
+  console.log(props.pokemon.page.edges);*/
 
   return (
     <div className={classes.pokemonContainer}>
-      {props.pokemon.page.edges.map(({ node }: any) => (
+      
+    </div>
+  );
+}
+
+/*{props.pokemon.page.edges.map(({ node }: any) => (
         <CustomizedDialog
           id={node.id}
           pokemonID={node.pokemonID}
           name={node.name}
           image={node.image}
         />
-      ))}
-    </div>
-  );
-}
-
+      ))} */
 export default PokemonContainer;

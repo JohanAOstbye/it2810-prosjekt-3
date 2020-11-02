@@ -1,6 +1,5 @@
 import { FormControl, FormHelperText, Input, InputLabel, TextField, Typography } from '@material-ui/core';
 import React, { Component, useState } from 'react';
-import './../css/Responsive.css';
 import { makeStyles } from "@material-ui/styles";
 import { gql } from 'apollo-boost';
 import PokemonContainer from '../body/PokemonContainer';

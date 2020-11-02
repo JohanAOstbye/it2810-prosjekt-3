@@ -1,5 +1,4 @@
 import React from 'react';
-import './../css/Responsive.css';
 import { AppBar, Toolbar, Box, Button, Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import SearchBar from './SearchBar';
