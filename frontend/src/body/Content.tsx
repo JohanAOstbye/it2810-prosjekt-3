@@ -2,7 +2,7 @@ import React, { createContext, useState,  } from "react";
 import PokemonPageination from "./Pokemon/PokemonPageination";
 import WelcomeComponent from "./WelcomeComponent";
 import { makeStyles } from "@material-ui/styles";
-import SearchBar from "./SearchBar_NEWOLD";
+import SearchBar from "./SearchBar";
 import { Provider, useSelector } from "react-redux";
 import Test from './SearchBar';
 
@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
 
 function Content(props: any) {
   const classes = useStyles();
-  const term = useSelector(state => state.term)
+  const term = useSelector((state:{term:String}) => state.term)
   return (
     <div className={classes.content}>
       <WelcomeComponent />

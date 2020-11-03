@@ -78,7 +78,7 @@ const RETURN_POKEMON_BY_SEARCH = gql`
 //   }
 
 // Container which returns PokemonCards
-function PokemonPageination() {
+function PokemonPageination(props:any) {
   // const filter = {
 
   // }
