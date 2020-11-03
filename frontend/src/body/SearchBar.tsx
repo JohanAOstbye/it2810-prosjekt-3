@@ -8,7 +8,7 @@ const SearchBar = () => {
   const handleChange = e => setText(e.target.value);
 
   const handleSubmit = e => {
-    const text = e.target.value.toLower()
+    const text = e.target.value.trim()
     // If the user pressed the Enter key:
     if (e.which === 13 && text) {
       // Dispatch the "todo added" action with this text

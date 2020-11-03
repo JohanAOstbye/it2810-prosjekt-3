@@ -57,7 +57,7 @@ const RETURN_ALL_POKEMON = gql`
   }
 `;
 
-//Return all pokemon
+//Return all pokemon by search
 const RETURN_POKEMON_BY_SEARCH = gql`
   query returnAllPokemon($after: String, $searchTerm: String!) {
     returnAllPokemon(
@@ -91,14 +91,14 @@ const RETURN_POKEMON_BY_SEARCH = gql`
 //   }
 
 // Container which returns PokemonCards
-function PokemonPageination() {
+function PokemonPageination(props: any) {
   // const filter = {
 
   // }
   const { data, loading, fetchMore, error } = useQuery(
     RETURN_POKEMON_BY_SEARCH,
     {
-      variables: { searchTerm: "charmander" },
+      variables: { searchTerm: props.term },
     }
   ); // all pokemon
 
@@ -106,7 +106,11 @@ function PokemonPageination() {
 
   //console.log(getState())
   //console.log(props.searchTerm)
+  console.log(props)
+  console.log(props.term)
   console.log(data);
+  console.log(data.returnAllPokemon);
+  console.log(data.returnAllPokemon.edges);
   return (
     <div>
       

@@ -2,7 +2,7 @@ import React, { createContext, useState,  } from "react";
 import PokemonPageination from "./Pokemon/PokemonPageination";
 import WelcomeComponent from "./WelcomeComponent";
 import { makeStyles } from "@material-ui/styles";
-import SearchBar from "./SearchBar_NEWOLD";
+import SearchBar from "./SearchBar";
 import { Provider, useSelector } from "react-redux";
 import Test from './SearchBar';
 
@@ -28,7 +28,7 @@ function Content(props: any) {
       <WelcomeComponent />
       {term}
       <SearchBar />
-      <PokemonPageination term={term}/>
+      <PokemonPageination term={term} />
     </div>
   );
 }

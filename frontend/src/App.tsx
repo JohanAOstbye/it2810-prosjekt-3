@@ -44,12 +44,12 @@ const unsubscribe = store.subscribe(() =>
 
 store.dispatch({
   type: "CHANGE_TERM",
-  payload: "lmaooo"
+  payload: "charmander"
 });
 
 store.dispatch({
   type: "CHANGE_TERM",
-  payload: "xD"
+  payload: "bulbasaur"
 });
 
 unsubscribe();
