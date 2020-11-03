@@ -21,6 +21,7 @@
     "graphql-tag": "^2.11.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-infinite-scrolling": "^0.1.0",
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
     "typescript": "~3.7.2"

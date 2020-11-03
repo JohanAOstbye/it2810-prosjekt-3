@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './../css/Responsive.css';
-import { AppBar, Toolbar, Box, Button, Container, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, Box, Button, Container, Typography, Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import SearchBar from './SearchBar';
 
 const useStyles = makeStyles(() => ({
   headerContainer: {
-    minHeight: "15vh",
+    minHeight: "8vh",
     padding: "0"
   },
   contentContainer: {
   },
   typographyStyles: {
     color: "white",
-    fontSize: 80,
+    fontSize: 60,
     flexGrow: 1
   },
   toolBarStyles: {
@@ -25,11 +25,11 @@ const useStyles = makeStyles(() => ({
 
 const Header = () => {
   const classes = useStyles();
+
   return (
     <AppBar position="static" className={classes.headerContainer} color="primary" color-variant="dark">
       <Toolbar className={classes.toolBarStyles}>
         <Typography className={classes.typographyStyles}>Pokébase</Typography>
-        <SearchBar />
       </Toolbar>
     </AppBar>
   );

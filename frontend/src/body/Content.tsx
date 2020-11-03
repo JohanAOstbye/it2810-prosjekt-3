@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import PokemonContainer from "./PokemonContainer";
+import React from "react";
 import "./../css/Responsive.css";
 import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import SinglePokemonQuery from "./CustomizedDialog";
+import PokemonPageination from "./Pokemon/PokemonPageination";
 
 const useStyles = makeStyles(() => ({
   typographyStyles: {
@@ -38,11 +37,9 @@ function Content() {
   return (
     <div className="content">
       <WelcomeComponent />
-      <PokemonContainer/>
+      <PokemonPageination/>
     </div>
   );
 }
-
-/*<SinglePokemonQuery />*/
 
 export default Content;

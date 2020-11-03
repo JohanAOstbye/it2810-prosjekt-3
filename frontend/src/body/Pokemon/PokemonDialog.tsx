@@ -4,13 +4,13 @@ import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { useQuery, gql, NetworkStatus } from "@apollo/client";
-import theme from "./../theme";
+import { useQuery, gql} from "@apollo/client";
+import theme from "../../theme";
 import {
   withStyles,
   makeStyles,
 } from "@material-ui/core/styles";
-import DenseTable from "./DenseTable";
+import DenseTable from "../DenseTable";
 
 
 /* Styles */
@@ -72,76 +72,6 @@ query ($id: String!){
 }
 `;
 
-
-/* Components */
-
-// Returns a DialogPokemon component with the pokemon-parameteres fetched.
-function SinglePokemonQuery(props: any) {
-  const { loading, error, data } = useQuery(
-    GET_SINGLE_POKEMON,
-    {
-      variables: { id:props.id }
-    }
-  );
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error ${error.message}</p>;
-  
-  return <DialogPokemon pokemon={data.returnSinglePokemon} />;
-};
-
-
-// PokemonCard, returns a pokemon-preview
-function PokemonCard(props: any) {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.pokemonCard}>
-      <Typography variant="h4">{props.pokemonID}</Typography>
-      <Typography variant="h6">{props.name}</Typography>
-      <img
-        className={classes.pokemonCardImage}
-        src={props.image}
-        width="150px"
-      />
-    </div>
-  );
-}
-
-
-/* Dialogs */
-
-// CustomizedDialog, returns the PokemonCard-preview, and the dialog when preview is clicked
-function CustomizedDialog(props: any) {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    console.log("CLICKED!");
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <div>
-      <div onClick={handleClickOpen}>
-        <PokemonCard
-          id={props.id}
-          pokemonID={props.pokemonID}
-          name={props.name}
-          image={props.image}
-        />
-      </div>
-
-      <Dialog onClose={handleClose} open={open}>
-        <SinglePokemonQuery id={props.id}/>
-      </Dialog>
-    </div>
-  );
-}
-
 // DialogTitle, returns a Custom Title
 function DialogTitle(props: any){
   const { children, onClose, ...other } = props;
@@ -175,29 +105,38 @@ function createData(name: string, value: string) {
   return { name, value };
 }
 
-//DialogPokemon, return the fetched pokemon information
-function DialogPokemon(props: any) {
+//PokemonDialog, return the fetched pokemon information
+function PokemonDialog(props: any) {
   const classes = useStyles();
-  
+  const { loading, error, data } = useQuery(
+    GET_SINGLE_POKEMON,
+    {
+      variables: { id:props.id }
+    }
+  );
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error ${error.message}</p>;
+  const pokemon = data.returnSinglePokemon
   const rows = [
-    createData("Name", props.pokemon.name),
-    createData("Experience", props.pokemon.base_experience),
-    createData("Height", props.pokemon.height),
-    createData("Weight", props.pokemon.weight),
+    createData("Name", pokemon.name),
+    createData("Experience", pokemon.base_experience),
+    createData("Height", pokemon.height),
+    createData("Weight", pokemon.weight),
   ];
 
   return(
-    <div>
+    <Dialog onClose={props.handleClose} open={props.open}>
       <DialogTitle /*onClose={handleClose}*/>
-        Pokédex #{props.pokemon.pokemonID}
+        Pokédex #{pokemon.pokemonID}
       </DialogTitle>
       <DialogContent dividers className={classes.dialogContent}>
-        <img className={classes.dialogContentImage} src={props.pokemon.image} />
+        <img className={classes.dialogContentImage} src={pokemon.image} />
         <DenseTable rows={rows} />
-        <Typography variant="caption">pokébase_id: {props.pokemon.id}</Typography>
+        <Typography variant="caption">pokébase_id: {pokemon.id}</Typography>
       </DialogContent>
-    </div>
+    </Dialog>
   );
 }
 
-export default CustomizedDialog;
+export default PokemonDialog;
