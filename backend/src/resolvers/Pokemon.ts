@@ -92,7 +92,7 @@ export class PokemonResolver {
       sliceStart: offset || 0,
     });
 
-    return { page, pageData: { count, limit, offset } };
+    return page;
   }
 
   @Mutation(() => PokemonStat)
