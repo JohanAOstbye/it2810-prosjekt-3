@@ -1,7 +1,8 @@
 import React from "react";
-import { useQuery, gql, InMemoryCache, Reference } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
 import { makeStyles } from "@material-ui/core/styles";
 import PokemonList from "./PokemonList";
+<<<<<<< HEAD
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -12,6 +13,8 @@ const cache = new InMemoryCache({
     },
   },
 });
+=======
+>>>>>>> 5547edee133b71988db017344b32c194c8653c78
 /* Styles */
 
 //Styles for PokemonCard and PokemonContainer
@@ -31,27 +34,25 @@ const useStyles = makeStyles(() => ({
 
 //Return all pokemon
 const RETURN_ALL_POKEMON = gql`
-  query returnAllPokemon($after: String) {
-    returnAllPokemon(
-      orderby: "pokemonID"
-      filter: {}
-      data: { first: 20, after: $after }
-    ) {
-      edges {
-        cursor
-        node {
-          id
-          pokemonID
-          name
-          image
+query returnAllPokemon($after: String){
+  returnAllPokemon(orderby: {key:"pokemonID", direction:1}, filter: {}, data: {first: 20, after:$after}){
+    edges{
+        cursor,
+        node{
+        id,
+        pokemonID,
+        name,
+        image,
+        base_experience,
+        height,
+        weight
         }
-      }
-      pageInfo {
-        startCursor
-        endCursor
+    }
+    pageInfo{
+        startCursor,
+        endCursor,
+        hasPreviousPage,
         hasNextPage
-        hasPreviousPage
-      }
     }
   }
 `;
@@ -90,7 +91,7 @@ const RETURN_POKEMON_BY_SEARCH = gql`
 //   }
 
 // Container which returns PokemonCards
-function PokemonPageination(props: any) {
+function PokemonPageination(props:any) {
   // const filter = {
 
   // }
@@ -103,18 +104,25 @@ function PokemonPageination(props: any) {
 
   if (loading) return <p>Loading</p>;
 
-  //console.log(getState())
-  //console.log(props.searchTerm)
-  console.log(props)
-  console.log(props.term)
-  console.log(data);
-  console.log(data.returnAllPokemon);
-  console.log(data.returnAllPokemon.edges);
-  return (
-    <div>
-      
-    </div>
-  );
+    console.log(data);
+    return (
+        <div>
+            <PokemonList
+                loading={loading}
+                entries={data.returnAllPokemon.edges.map((edge: { node: any; }) => edge.node)}
+                onLoadMore={() => {
+                    fetchMore(
+                        {
+                            variables: {
+                                after: data.returnAllPokemon.pageInfo.endCursor,
+                            }
+                        });
+                }}
+                error={error}
+                end={data.returnAllPokemon.pageInfo.hasNextPage}
+            ></PokemonList>
+        </div>
+    );
 }
 
 /*<PokemonList

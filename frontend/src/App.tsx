@@ -8,10 +8,25 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { makeStyles } from "@material-ui/core";
+import PopulateDB from "./populateDB/PopulateDB";
+import { relayStylePagination } from "@apollo/client/utilities";
 import { Provider, useSelector } from "react-redux";
 import termReducer from "./reducers/termReducer";
 import { createStore } from "redux";
 
+
+
+const cache = new InMemoryCache({
+  typePolicies: {
+      Query: {
+          fields: {
+              returnAllPokemon: relayStylePagination()
+          },
+      },
+  },
+});
+
+export const SearchTermContext = createContext(null);
 /* Styles */
 
 
@@ -33,7 +48,7 @@ const useStyles = makeStyles(() => ({
 
 const client = new ApolloClient({
   uri: "http://localhost:3333/graphql", 
-  cache: new InMemoryCache()
+  cache: cache
 });
 
 console.log('Initial State:', store.getState())

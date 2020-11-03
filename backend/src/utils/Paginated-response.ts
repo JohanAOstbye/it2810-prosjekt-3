@@ -1,6 +1,5 @@
 import * as Relay from 'graphql-relay'
 import { ObjectType, Field } from 'type-graphql'
-import PageData from './Page-data'
 import { Type } from '@nestjs/common'
 
 const typeMap: any = {}
@@ -45,17 +44,6 @@ export default function relayTypes<T>(type: Type<T>): any {
     public pageInfo!: Relay.PageInfo
   }
 
-  @ObjectType(`${name}Page`, { isAbstract: true })
-  abstract class Page {
-    public name = `${name}Page`
-
-    @Field(() => Connection)
-    public page!: Connection
-
-    @Field(() => PageData, { nullable: true })
-    public pageData!: PageData
-  }
-
-  typeMap[`${name}`] = Page
+  typeMap[`${name}`] = Connection
   return typeMap[`${name}`]
 }

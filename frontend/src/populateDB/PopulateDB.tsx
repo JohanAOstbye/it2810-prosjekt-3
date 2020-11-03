@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { PokemonInput, stat, IapiPokemon, pokemonReducer } from "./pokemonReducer"
@@ -48,9 +46,9 @@ function PopulateDB() {
         createPokemon({ variables: { pokemon: pokemon, stats: stats } })
     }
 
-    const fetchPokemons = () => {
+    const fetchPokemons = async () => {
         for(let i = 1; i < 451; i++) {
-            fetchAndStorePokemon(i);
+            await fetchAndStorePokemon(i);
         }
     }
 

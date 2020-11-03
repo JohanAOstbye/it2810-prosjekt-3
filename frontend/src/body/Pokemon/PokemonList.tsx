@@ -48,7 +48,6 @@ function PokemonList(props: any) {
       document.documentElement.clientHeight || window.innerHeight;
     var scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
     if (scrolledToBottom) {
-      console.log("bottom!")
       props.onLoadMore();
     }
   };

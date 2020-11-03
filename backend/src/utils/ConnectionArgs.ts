@@ -1,5 +1,6 @@
 import { ConnectionArguments, ConnectionCursor, fromGlobalId } from 'graphql-relay'
 import { Field, InputType} from 'type-graphql'
+import { IsIn } from "class-validator"
 
 type PagingMeta =
   | { pagingType: 'forward'; after?: string; first: number }
@@ -81,4 +82,14 @@ export default class ConnectionArgs implements ConnectionArguments {
   pagingParams() {
     return getPagingParameters(this)
   }
+}
+
+@InputType()
+export class OrderByArgs{
+  @Field({ description: 'Paginate before opaque cursor' })
+  key:String
+  
+  @Field({ defaultValue: 1 , nullable: true, description: 'Paginate before opaque cursor' })
+  @IsIn([1, -1])
+  direction:number
 }

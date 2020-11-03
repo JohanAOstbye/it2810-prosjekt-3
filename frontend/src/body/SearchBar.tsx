@@ -5,10 +5,8 @@ const SearchBar = () => {
   const [text, setText] = useState('')
   const dispatch = useDispatch()
 
-  const handleChange = (e: any) => setText(e.target.value);
-
-  const handleSubmit = (e: any) => {
-    const text = e.target.value.trim()
+  const handleSubmit = (e:any) => {
+    const text = e.target.value.trim();
     // If the user pressed the Enter key:
     if (e.which === 13 && text) {
       // Dispatch the "todo added" action with this text
@@ -24,8 +22,8 @@ const SearchBar = () => {
       placeholder="Search Pokébase..."
       autoFocus={true}
       value={text}
-      onChange={handleChange}
-      onKeyDown={handleSubmit}
+      onChange={(e) => setText(e.target.value)}
+      onKeyDown={(e) => handleSubmit(e)}
     />
   )
 }
