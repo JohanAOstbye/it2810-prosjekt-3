@@ -35,7 +35,7 @@ export class UserResolver {
       sliceStart: offset || 0,
     });
 
-    return { page, pageData: { count, limit, offset } };
+    return page;
   }
 
   // @Query(() => PokemonResponse)
@@ -77,7 +77,7 @@ export class UserResolver {
       sliceStart: offset || 0,
     });
 
-    return { page, pageData: { count, limit, offset } };
+    return page;
   }
 
   @Mutation(() => User)
