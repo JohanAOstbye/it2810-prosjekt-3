@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./../../css/Responsive.css";
 import {
   makeStyles,
 } from "@material-ui/core/styles";

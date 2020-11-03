@@ -1,13 +1,10 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState,  } from "react";
 import PokemonPageination from "./Pokemon/PokemonPageination";
 import WelcomeComponent from "./WelcomeComponent";
 import { makeStyles } from "@material-ui/styles";
-import SearchBar from "./SearchBar";
-import { Provider } from 'react-redux';
-//import { Values } from 'redux-form-website-template';
-import store from './SearchBarStore';
-import showResults from './ShowResults';
-
+import SearchBar from "./SearchBar_NEWOLD";
+import { Provider, useSelector } from "react-redux";
+import Test from './SearchBar';
 
 //const [input, setInput] = useState(null);
 
@@ -18,26 +15,34 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     alignContent: "center",
     alignItems: "center",
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
+
 
 function Content(props: any) {
   const classes = useStyles();
+  const term = useSelector(state => state.term)
   return (
     <div className={classes.content}>
-      <Provider store={store}>
-        <SearchBar onSubmit={showResults} />
-      </Provider>
       <WelcomeComponent />
-      <PokemonPageination/>
+      {term}
+      <SearchBar />
+      <PokemonPageination term={term}/>
     </div>
   );
 }
 
 export default Content;
 
+/*OLD SEARCHBAR
 
+        <SearchBar/>
+
+        <SearchBar onSubmit={store.dispatch(setSearchTerm())} />
+
+        <PokemonPageination searchTerm={store.getState()}/>
+*/
 
 /* OLD POKEMON_CONTAINER
 

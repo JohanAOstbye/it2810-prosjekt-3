@@ -8,10 +8,14 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { makeStyles } from "@material-ui/core";
-
-export const SearchTermContext = createContext(null);
+import { Provider, useSelector } from "react-redux";
+import termReducer from "./reducers/termReducer";
+import { createStore } from "redux";
 
 /* Styles */
+
+
+const store = createStore(termReducer);
 
 const useStyles = makeStyles(() => ({
   app: {
@@ -32,18 +36,38 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
+console.log('Initial State:', store.getState())
+
+const unsubscribe = store.subscribe(() =>
+  console.log('State after dispatch: ', store.getState())
+)
+
+store.dispatch({
+  type: "CHANGE_TERM",
+  payload: "lmaooo"
+});
+
+store.dispatch({
+  type: "CHANGE_TERM",
+  payload: "xD"
+});
+
+unsubscribe();
+
 export default function App() {
   const classes = useStyles();
   return (
     
     <ApolloProvider client={client}>
-      <div className={classes.app}>
-        <Header />
-        <div className={classes.appContent}>
-          <Content />
-          <SideBar />
+      <Provider store={store}>
+        <div className={classes.app}>
+          <Header />
+          <div className={classes.appContent}>
+            <Content />
+            <SideBar />
+          </div>
         </div>
-      </div>
+      </Provider>
     </ApolloProvider>
   );
 }
