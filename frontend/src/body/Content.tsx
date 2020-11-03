@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
 
 function Content(props: any) {
   const classes = useStyles();
-  const term = useSelector(state => state.term)
+  const term = useSelector((state:{term:String}) => state.term)
   return (
     <div className={classes.content}>
       <WelcomeComponent />

@@ -2,11 +2,11 @@ import {
     CHANGE_TERM
 } from './../actions/types';
 
-const initialState = {
+const defaultState = {
     term: ''
 }
 
-export default function termReducer(state = initialState, action: any) {
+export default function termReducer(state = defaultState, action: any) {
 switch (action.type) {
     case "CHANGE_TERM": 
         return { 

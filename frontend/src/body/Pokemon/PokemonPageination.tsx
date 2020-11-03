@@ -2,7 +2,6 @@ import React from "react";
 import { useQuery, gql, InMemoryCache, Reference } from "@apollo/client";
 import { makeStyles } from "@material-ui/core/styles";
 import PokemonList from "./PokemonList";
-import { relayStylePagination } from "@apollo/client/utilities";
 
 const cache = new InMemoryCache({
   typePolicies: {
