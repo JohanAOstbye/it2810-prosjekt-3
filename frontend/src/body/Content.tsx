@@ -1,41 +1,25 @@
 import React from "react";
 import "./../css/Responsive.css";
-import {
-  Typography,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
 import PokemonPageination from "./Pokemon/PokemonPageination";
+import WelcomeComponent from "./WelcomeComponent";
+import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(() => ({
-  typographyStyles: {
-    color: "white",
-  },
-  subHeader: {
-  /*display: "flex",
-    flexDirection: "row",
-    width: "100%"*/
-    padding: "0.5rem",
-    textAlign: "center",
-  },
-  subHeaderText: {
-    //flexGrow: 1
-  },
+  content: {
+    margin: "0.5rem",
+    paddingTop: "1rem",
+    display: "flex",
+    flexDirection: "column",
+    alignContent: "center",
+    alignItems: "center",
+    flexGrow: 1
+  }
 }));
 
-function WelcomeComponent() {
+function Content() {
   const classes = useStyles();
   return (
-    <div className={classes.subHeader}>
-      <Typography variant="h4" className={classes.subHeaderText} >
-        Click on a Pokémon to learn more about it. You can also filter by searching for a specific one.
-      </Typography>
-    </div>
-  );
-}
-
-function Content() {
-  return (
-    <div className="content">
+    <div className={classes.content}>
       <WelcomeComponent />
       <PokemonPageination/>
     </div>
