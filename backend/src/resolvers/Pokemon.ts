@@ -10,7 +10,7 @@ import { Pokemon, PokemonModel, PokemonResponse } from "../entities/Pokemon";
 import { PokemonFilter, PokemonInput } from "./types/Pokemon-input";
 import { PokemonStat, PokemonStatModel } from "../entities/PokemonStat";
 import { PokemonStatInput } from "./types/PokemonStat-input";
-import ConnectionArgs from "../utils/ConnectionArgs";
+import ConnectionArgs, { OrderByArgs } from "../utils/ConnectionArgs";
 import * as Relay from "graphql-relay";
 
 @Resolver((of) => Pokemon)
@@ -40,7 +40,7 @@ export class PokemonResolver {
       maxHeight,
       minHeight,
     }: PokemonFilter,
-    @Arg("orderby") orderBy?: String //Optional (???)
+    @Arg("orderby") {key, direction}: OrderByArgs
   ): Promise<PokemonResponse> {
     let filter: {
       pokemonId?: { $lte?: number, $gte?: number};
@@ -84,13 +84,18 @@ export class PokemonResolver {
       filter.name = name
     }
 
-    const { limit, offset } = args.pagingParams();
-    const pokemons = await PokemonModel.find(filter).sort(orderBy);
-    const count = await PokemonModel.countDocuments(filter);
+    let { offset } = args.pagingParams();
+    if(offset == undefined) {
+      offset = 0
+    }
+    const pokemons = await PokemonModel.find(filter).sort(key);
+    console.log("finding Pokomon after index: " + offset);
     const page = Relay.connectionFromArraySlice(pokemons, args, {
       arrayLength: pokemons.length,
-      sliceStart: offset || 0,
+      sliceStart: offset,
     });
+
+    console.log(page.edges.map(pokemon => pokemon.node.pokemonID))
 
     return page;
   }

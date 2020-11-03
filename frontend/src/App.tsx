@@ -8,6 +8,18 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { makeStyles } from "@material-ui/core";
+import PopulateDB from "./populateDB/PopulateDB";
+import { relayStylePagination } from "@apollo/client/utilities";
+
+const cache = new InMemoryCache({
+    typePolicies: {
+        Query: {
+            fields: {
+                returnAllPokemon: relayStylePagination()
+            },
+        },
+    },
+});
 
 export const SearchTermContext = createContext(null);
 
@@ -29,7 +41,7 @@ const useStyles = makeStyles(() => ({
 
 const client = new ApolloClient({
   uri: "http://localhost:3333/graphql", 
-  cache: new InMemoryCache()
+  cache: cache
 });
 
 export default function App() {
@@ -40,6 +52,7 @@ export default function App() {
       <div className={classes.app}>
         <Header />
         <div className={classes.appContent}>
+          <PopulateDB></PopulateDB>
           <Content />
           <SideBar />
         </div>

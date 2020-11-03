@@ -1,5 +1,4 @@
 import React from "react";
-import "./../../css/Responsive.css";
 import { useQuery, gql, InMemoryCache, Reference } from "@apollo/client";
 import {
     makeStyles,
@@ -11,8 +10,7 @@ const cache = new InMemoryCache({
     typePolicies: {
         Query: {
             fields: {
-                returnAllPokemon: {
-                }
+                returnAllPokemon: relayStylePagination()
             },
         },
     },
@@ -38,34 +36,28 @@ const useStyles = makeStyles(() => ({
 //Return all pokemon
 const RETURN_ALL_POKEMON = gql`
 query returnAllPokemon($after: String){
-  returnAllPokemon(orderby: "pokemonID", filter: {}, data: {first: 20, after:$after}){
-    page{
-      edges {
+  returnAllPokemon(orderby: {key:"pokemonID", direction:1}, filter: {}, data: {first: 20, after:$after}){
+    edges{
         cursor,
-        node {
-          id,
-          pokemonID,
-          name,
-          image
+        node{
+        id,
+        pokemonID,
+        name,
+        image,
+        base_experience,
+        height,
+        weight
         }
-      },
-      pageInfo{
+    }
+    pageInfo{
         startCursor,
         endCursor,
-        hasNextPage,
         hasPreviousPage,
-      }
+        hasNextPage
     }
   }
 }
 `;
-
-// pageData{
-//     count, 
-//     limit, 
-//     offset
-//   }
-
 
 
 
@@ -85,17 +77,17 @@ function PokemonPageination() {
         <div>
             <PokemonList
                 loading={loading}
-                entries={data.returnAllPokemon.page.edges.map((edge: { node: any; }) => edge.node)}
+                entries={data.returnAllPokemon.edges.map((edge: { node: any; }) => edge.node)}
                 onLoadMore={() => {
                     fetchMore(
                         {
                             variables: {
-                                after: data.returnAllPokemon.page.pageInfo.endCursor,
+                                after: data.returnAllPokemon.pageInfo.endCursor,
                             }
                         });
                 }}
                 error={error}
-                end={data.returnAllPokemon.page.pageInfo.hasNextPage}
+                end={data.returnAllPokemon.pageInfo.hasNextPage}
             ></PokemonList>
         </div>
     );

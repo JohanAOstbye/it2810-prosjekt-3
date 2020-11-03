@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Field, reduxForm } from "redux-form";
-import { TextField, SelectField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 //import asyncValidate from './asyncValidate'; maybe?
 
 
@@ -22,7 +22,7 @@ const renderTextField = ({
   label,
   meta: { touched, error },
   ...custom
-}) => (
+}:{input:any,label:any, meta: {touched:any, error:any}}) => (
   <TextField
     hintText={label}
     floatingLabelText={label}

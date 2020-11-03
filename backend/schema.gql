@@ -26,10 +26,12 @@ type Mutation {
   registerUser(data: UserInput!): User!
 }
 
-type PageData {
-  count: Float!
-  limit: Float!
-  offset: Float!
+input OrderByArgs {
+  """Paginate before opaque cursor"""
+  direction: Float = 1
+
+  """Paginate before opaque cursor"""
+  key: String!
 }
 
 """The Pokemon model"""
@@ -44,11 +46,6 @@ type Pokemon {
   stats: PokemonStat!
   types: [String!]!
   weight: Int!
-}
-
-type PokemonConnection {
-  edges: [PokemonEdge!]
-  pageInfo: PokemonPageInfo
 }
 
 type PokemonEdge {
@@ -85,8 +82,8 @@ type PokemonPageInfo {
 }
 
 type PokemonResponse {
-  page: PokemonConnection!
-  pageData: PageData
+  edges: [PokemonEdge!]
+  pageInfo: PokemonPageInfo
 }
 
 """The PokemonStat model"""
@@ -105,7 +102,7 @@ input PokemonStatInput {
 
 type Query {
   login(data: UserLoginInput!): User!
-  returnAllPokemon(data: ConnectionArgs!, filter: PokemonFilter!, orderby: String!): PokemonResponse!
+  returnAllPokemon(data: ConnectionArgs!, filter: PokemonFilter!, orderby: OrderByArgs!): PokemonResponse!
   returnAllUsers(data: ConnectionArgs!): UserResponse!
   returnSinglePokemon(id: String!): Pokemon!
   returnSinglePokemonStat(id: String!): PokemonStat!
@@ -123,11 +120,6 @@ type User {
 input UserAddPokemonInput {
   pokemonID: String!
   userID: String!
-}
-
-type UserConnection {
-  edges: [UserEdge!]
-  pageInfo: UserPageInfo
 }
 
 type UserEdge {
@@ -154,6 +146,6 @@ type UserPageInfo {
 }
 
 type UserResponse {
-  page: UserConnection!
-  pageData: PageData
+  edges: [UserEdge!]
+  pageInfo: UserPageInfo
 }

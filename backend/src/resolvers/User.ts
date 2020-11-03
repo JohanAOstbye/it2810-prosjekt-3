@@ -9,7 +9,6 @@ import {
 import ConnectionArgs from "../utils/ConnectionArgs";
 import * as Relay from "graphql-relay"
 import { PokemonFilter } from "./types/Pokemon-input";
-import { filter } from "compression";
 
 @Resolver((of) => User)
 export class UserResolver {
@@ -27,9 +26,8 @@ export class UserResolver {
   async returnAllUsers(
     @Arg("data") args: ConnectionArgs
   ): Promise<UserResponse> {
-    const { limit, offset } = args.pagingParams();
+    const { offset } = args.pagingParams();
     const users = await UserModel.find();
-    const count = await UserModel.countDocuments({});
     const page = Relay.connectionFromArraySlice(users, args, {
       arrayLength: users.length,
       sliceStart: offset || 0,
@@ -55,7 +53,7 @@ export class UserResolver {
     }: PokemonFilter,
     @Arg("orderby") orderBy: String
   ): Promise<PokemonResponse> {
-    const { limit, offset } = args.pagingParams();
+    const { offset } = args.pagingParams();
     const founduser = await UserModel.findById({_id: user.id})
     if(!founduser) {
       throw new Error("could not find user")
@@ -71,7 +69,6 @@ export class UserResolver {
         minHeight,
       })
     ).sort(dynamicSort(orderBy.toString()))
-    const count = pokedex.length;
     const page = Relay.connectionFromArraySlice(pokedex, args, {
       arrayLength: pokedex.length,
       sliceStart: offset || 0,
