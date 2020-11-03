@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import Header from "./nav/Header";
 import Content from "./body/Content";
 import SideBar from "./sidebar/SideBar";
@@ -8,6 +8,8 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { makeStyles } from "@material-ui/core";
+
+export const SearchTermContext = createContext(null);
 
 /* Styles */
 

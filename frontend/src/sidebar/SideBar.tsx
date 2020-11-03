@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
 function SideBarList(){
   const classes = useStyles();
   return (
-    <Typography className={classes.sideBarList}>
+    <div className={classes.sideBarList}>
       <List>
         <ListItem>All Pokémon</ListItem>
         <ListItem>Generation 1</ListItem>
@@ -36,7 +36,7 @@ function SideBarList(){
       <List>
         <ListItem>PokeAPI</ListItem>
       </List>
-    </Typography>
+    </div>
   );
 }
 

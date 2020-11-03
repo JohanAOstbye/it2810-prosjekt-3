@@ -1,10 +1,14 @@
-import React, { Component, useState } from "react";
+import React, { Component, useContext, useState } from "react";
 import CustomizedDialog from "./CustomizedDialog";
 import { Typography } from "@material-ui/core";
 import { useQuery, gql, NetworkStatus } from "@apollo/client";
 import {
   makeStyles,
 } from "@material-ui/core/styles";
+import { SearchTermContext } from "../App";
+
+//const { input } = useContext(SearchTermContext);
+
 
 /* Styles */
 
@@ -23,7 +27,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 /* Queries */
-/*
+
 //Return all pokemon
 const RETURN_ALL_POKEMON = gql`
 query {returnAllPokemon(orderby: "pokemonID", filter: {}, data: {first:4}){
@@ -40,7 +44,7 @@ query {returnAllPokemon(orderby: "pokemonID", filter: {}, data: {first:4}){
 const RETURN_POKEMON_BY_SEARCH = gql`
 query ($searchTerm: String!){
   returnAllPokemon(orderby: "pokemonID", filter: {
-    name: /$searchTerm/
+    name: $searchTerm
   }, data: {first:3}){
     page{
       edges{
@@ -50,44 +54,37 @@ query ($searchTerm: String!){
     }
   }
 `;
-*/
 
 /* Components */
 
-function PokemonSearchedFor(props: any) {
-}
-
 // Container which returns PokemonCards
-function PokemonContainer(props: any) {
+function PokemonContainer() {
   const classes = useStyles();
-  /*const { loading, error, data } = useQuery(
+
+  const { loading, error, data } = useQuery(
     RETURN_POKEMON_BY_SEARCH,
     {
-      variables: { searchTerm:props.searchTerm }
+      variables: { searchTerm:"charmander" }
     }
-  ); // all pokemon, by $searchTerm
+  );
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error ${error.message}</p>;*/
+  if (error) return <p>Error ${error.message}</p>;
 
-  console.log(props);
-  /*console.log(props.length);
-  console.log(props.pokemon);
-  console.log(props.pokemon.page.edges);*/
+  console.log();
 
   return (
     <div className={classes.pokemonContainer}>
-      
-    </div>
-  );
-}
-
-/*{props.pokemon.page.edges.map(({ node }: any) => (
+      {data.returnAllPokemon.page.edges.map(({ node }: any) => (
         <CustomizedDialog
           id={node.id}
           pokemonID={node.pokemonID}
           name={node.name}
           image={node.image}
         />
-      ))} */
+      ))}
+    </div>
+  );
+}
+
 export default PokemonContainer;
