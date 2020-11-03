@@ -1,63 +1,31 @@
-import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import { Field, reduxForm } from "redux-form";
-import { TextField } from "@material-ui/core";
-//import asyncValidate from './asyncValidate'; maybe?
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
+const SearchBar = () => {
+  const [text, setText] = useState('')
+  const dispatch = useDispatch()
 
-/* Styles */
-
-const useStyles = makeStyles(() => ({
-  searchBar: {
-    color: "white",
-    padding: "0.5rem",
-  },
-}));
-
-
-/*Constants */
-
-const renderTextField = ({
-  input,
-  label,
-  meta: { touched, error },
-  ...custom
-}:{input:any,label:any, meta: {touched:any, error:any}}) => (
-  <TextField
-    hintText={label}
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    {...custom}
-  />
-);
-
-const MaterialUiForm = (props: any) => {
-  const { handleSubmit, pristine, reset, submitting } = props;
-  const classes = useStyles();
+  const handleSubmit = (e:any) => {
+    const text = e.target.value.trim();
+    // If the user pressed the Enter key:
+    if (e.which === 13 && text) {
+      // Dispatch the "todo added" action with this text
+      dispatch({ type: 'CHANGE_TERM', payload: text })
+      // And clear out the text input
+      setText('')
+    }
+  }
 
   return (
-    <form onSubmit={handleSubmit} className={classes.searchBar} color="primary">
-      <div>
-        <Field
-          name="searchTerm"
-          component={renderTextField}
-          label="Search Term"
-        />
-      </div>     
+    <input
+      type="text"
+      placeholder="Search Pokébase..."
+      autoFocus={true}
+      value={text}
+      onChange={(e) => setText(e.target.value)}
+      onKeyDown={(e) => handleSubmit(e)}
+    />
+  )
+}
 
-      <div>
-        <button type="submit" disabled={pristine || submitting}>
-          Submit
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
-          Clear Values
-        </button>
-      </div>
-    </form>
-  );
-};
-
-export default reduxForm({
-  form: "MaterialUiForm", // a unique identifier for this form
-})(MaterialUiForm);
+export default SearchBar;

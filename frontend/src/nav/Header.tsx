@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Box, Button, Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import SearchBar from '../body/SearchBar';
+import SearchBar from '../body/SearchBar_OLD';
 
 const useStyles = makeStyles(() => ({
   headerContainer: {

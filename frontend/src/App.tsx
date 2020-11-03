@@ -10,20 +10,27 @@ import {
 import { makeStyles } from "@material-ui/core";
 import PopulateDB from "./populateDB/PopulateDB";
 import { relayStylePagination } from "@apollo/client/utilities";
+import { Provider, useSelector } from "react-redux";
+import termReducer from "./reducers/termReducer";
+import { createStore } from "redux";
+
+
 
 const cache = new InMemoryCache({
-    typePolicies: {
-        Query: {
-            fields: {
-                returnAllPokemon: relayStylePagination()
-            },
-        },
-    },
+  typePolicies: {
+      Query: {
+          fields: {
+              returnAllPokemon: relayStylePagination()
+          },
+      },
+  },
 });
 
 export const SearchTermContext = createContext(null);
-
 /* Styles */
+
+
+const store = createStore(termReducer);
 
 const useStyles = makeStyles(() => ({
   app: {
@@ -44,19 +51,38 @@ const client = new ApolloClient({
   cache: cache
 });
 
+console.log('Initial State:', store.getState())
+
+const unsubscribe = store.subscribe(() =>
+  console.log('State after dispatch: ', store.getState())
+)
+
+store.dispatch({
+  type: "CHANGE_TERM",
+  payload: "lmaooo"
+});
+
+store.dispatch({
+  type: "CHANGE_TERM",
+  payload: "xD"
+});
+
+unsubscribe();
+
 export default function App() {
   const classes = useStyles();
   return (
     
     <ApolloProvider client={client}>
-      <div className={classes.app}>
-        <Header />
-        <div className={classes.appContent}>
-          <PopulateDB></PopulateDB>
-          <Content />
-          <SideBar />
+      <Provider store={store}>
+        <div className={classes.app}>
+          <Header />
+          <div className={classes.appContent}>
+            <Content />
+            <SideBar />
+          </div>
         </div>
-      </div>
+      </Provider>
     </ApolloProvider>
   );
 }
