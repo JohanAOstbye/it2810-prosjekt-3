@@ -2,19 +2,6 @@ import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import { makeStyles } from "@material-ui/core/styles";
 import PokemonList from "./PokemonList";
-<<<<<<< HEAD
-
-const cache = new InMemoryCache({
-  typePolicies: {
-    Query: {
-      fields: {
-        returnAllPokemon: {},
-      },
-    },
-  },
-});
-=======
->>>>>>> 5547edee133b71988db017344b32c194c8653c78
 /* Styles */
 
 //Styles for PokemonCard and PokemonContainer
@@ -31,7 +18,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 /* Queries */
-
+/*
 //Return all pokemon
 const RETURN_ALL_POKEMON = gql`
 query returnAllPokemon($after: String){
@@ -56,14 +43,15 @@ query returnAllPokemon($after: String){
     }
   }
 `;
+*/
 
 //Return all pokemon by search
 const RETURN_POKEMON_BY_SEARCH = gql`
-  query returnAllPokemon($after: String, $searchTerm: String!) {
+  query returnAllPokemon($after: String, $term: String) {
     returnAllPokemon(
-      orderby: "pokemonID"
-      filter: { name: $searchTerm }
       data: { first: 20, after: $after }
+      filter: { name: $term }
+      orderby: "pokemonID"
     ) {
       edges {
         cursor
@@ -95,10 +83,13 @@ function PokemonPageination(props:any) {
   // const filter = {
 
   // }
+
+  console.log(props)
+  console.log(props.term)
+
   const { data, loading, fetchMore, error } = useQuery(
-    RETURN_POKEMON_BY_SEARCH,
-    {
-      variables: { searchTerm: props.term },
+    RETURN_POKEMON_BY_SEARCH,{
+      variables: props.term
     }
   ); // all pokemon
 

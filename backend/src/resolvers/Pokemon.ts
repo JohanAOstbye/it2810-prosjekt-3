@@ -40,7 +40,7 @@ export class PokemonResolver {
       maxHeight,
       minHeight,
     }: PokemonFilter,
-    @Arg("orderby") {key, direction}: OrderByArgs
+    @Arg("orderby") key: String
   ): Promise<PokemonResponse> {
     let filter: {
       pokemonId?: { $lte?: number, $gte?: number};

@@ -26,14 +26,6 @@ type Mutation {
   registerUser(data: UserInput!): User!
 }
 
-input OrderByArgs {
-  """Paginate before opaque cursor"""
-  direction: Float = 1
-
-  """Paginate before opaque cursor"""
-  key: String!
-}
-
 """The Pokemon model"""
 type Pokemon {
   base_experience: Int!
@@ -102,7 +94,7 @@ input PokemonStatInput {
 
 type Query {
   login(data: UserLoginInput!): User!
-  returnAllPokemon(data: ConnectionArgs!, filter: PokemonFilter!, orderby: OrderByArgs!): PokemonResponse!
+  returnAllPokemon(data: ConnectionArgs!, filter: PokemonFilter!, orderby: String!): PokemonResponse!
   returnAllUsers(data: ConnectionArgs!): UserResponse!
   returnSinglePokemon(id: String!): Pokemon!
   returnSinglePokemonStat(id: String!): PokemonStat!
