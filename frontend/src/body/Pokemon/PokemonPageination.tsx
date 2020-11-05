@@ -1,54 +1,31 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import PokemonList from "./PokemonList";
+import { useSelector } from "react-redux";
 /* Styles */
 
 //Styles for PokemonCard and PokemonContainer
-const useStyles = makeStyles(() => ({
-  pokemonContainer: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    paddingTop: "1rem",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-  },
-}));
+// const useStyles = makeStyles(() => ({
+//   pokemonContainer: {
+//     display: "flex",
+//     flexDirection: "row",
+//     flexWrap: "wrap",
+//     paddingTop: "1rem",
+//     justifyContent: "center",
+//     alignContent: "center",
+//     alignItems: "center",
+//   },
+// }));
 
 /* Queries */
-/*
-//Return all pokemon
-const RETURN_ALL_POKEMON = gql`
-query returnAllPokemon($after: String){
-  returnAllPokemon(orderby: {key:"pokemonID", direction:1}, filter: {}, data: {first: 20, after:$after}){
-    edges{
-        cursor,
-        node{
-        id,
-        pokemonID,
-        name,
-        image,
-        base_experience,
-        height,
-        weight
-        }
-    }
-    pageInfo{
-        startCursor,
-        endCursor,
-        hasPreviousPage,
-        hasNextPage
-    }
-  }
-`;
-*/
 
-//Return all pokemon by search
+//Return all pokemon
 const RETURN_POKEMON_BY_SEARCH = gql`
-  query returnAllPokemon($after: String, $term: String) {
+  query returnAllPokemon($after: String, $name: String!) {
     returnAllPokemon(
+      orderby: "pokemonID"
+      filter: { name: $name }
       data: { first: 20, after: $after }
       filter: { name: $term }
       orderby: "pokemonID"
@@ -79,41 +56,38 @@ const RETURN_POKEMON_BY_SEARCH = gql`
 //   }
 
 // Container which returns PokemonCards
-function PokemonPageination(props:any) {
-  // const filter = {
-
-  // }
-
-  console.log(props)
-  console.log(props.term)
-
+function PokemonPageination(props: any) {
+  const term = useSelector((state:{term:String}) => state.term)
+  console.log("shearching for: ", term)
   const { data, loading, fetchMore, error } = useQuery(
-    RETURN_POKEMON_BY_SEARCH,{
-      variables: props.term
+    RETURN_POKEMON_BY_SEARCH,
+    {
+      variables: {name:""},
     }
   ); // all pokemon
 
   if (loading) return <p>Loading</p>;
 
-    console.log(data);
-    return (
-        <div>
-            <PokemonList
-                loading={loading}
-                entries={data.returnAllPokemon.edges.map((edge: { node: any; }) => edge.node)}
-                onLoadMore={() => {
-                    fetchMore(
-                        {
-                            variables: {
-                                after: data.returnAllPokemon.pageInfo.endCursor,
-                            }
-                        });
-                }}
-                error={error}
-                end={data.returnAllPokemon.pageInfo.hasNextPage}
-            ></PokemonList>
-        </div>
-    );
+  if (data === undefined) return <p>graphql is not working</p>;
+
+  return (
+    <div>
+      <PokemonList
+        loading={loading}
+        entries={data.returnAllPokemon.edges.map((edge: { node: any; }) => edge.node)}
+        onLoadMore={() => {
+          fetchMore(
+            {
+              variables: {
+                after: data.returnAllPokemon.pageInfo.endCursor,
+              }
+            });
+        }}
+        error={error}
+        end={data.returnAllPokemon.pageInfo.hasNextPage}
+      ></PokemonList>
+    </div>
+  );
 }
 
 /*<PokemonList

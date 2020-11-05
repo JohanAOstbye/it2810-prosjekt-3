@@ -90,6 +90,7 @@ export class PokemonResolver {
     }
     const pokemons = await PokemonModel.find(filter).sort(key);
     console.log("finding Pokomon after index: " + offset);
+    pokemons.splice(0,offset)
     const page = Relay.connectionFromArraySlice(pokemons, args, {
       arrayLength: pokemons.length,
       sliceStart: offset,

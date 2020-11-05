@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { useQuery, gql} from "@apollo/client";
+import { gql, useLazyQuery} from "@apollo/client";
 import theme from "../../theme";
 import {
   withStyles,
@@ -108,14 +108,17 @@ function createData(name: string, value: string) {
 //PokemonDialog, return the fetched pokemon information
 function PokemonDialog(props: any) {
   const classes = useStyles();
-  const { loading, error, data } = useQuery(
-    GET_SINGLE_POKEMON,
-    {
-      variables: { id:props.id }
-    }
+  const [ getPokemon, {loading, error, data} ] = useLazyQuery(
+    GET_SINGLE_POKEMON
   );
 
-  if (loading) return <p>Loading...</p>;
+  useEffect(()=> {
+    getPokemon({
+      variables: { id:props.id }
+    })
+  }, [props.open, getPokemon, props.id])
+
+  if (loading || !props.open) return <p>Loading...</p>;
   if (error) return <p>Error ${error.message}</p>;
   const pokemon = data.returnSinglePokemon
   const rows = [
@@ -127,11 +130,11 @@ function PokemonDialog(props: any) {
 
   return(
     <Dialog onClose={props.handleClose} open={props.open}>
-      <DialogTitle /*onClose={handleClose}*/>
+      <DialogTitle>
         Pokédex #{pokemon.pokemonID}
       </DialogTitle>
       <DialogContent dividers className={classes.dialogContent}>
-        <img className={classes.dialogContentImage} src={pokemon.image} />
+        <img className={classes.dialogContentImage} src={pokemon.image} alt={"picrute of" + pokemon.name} />
         <DenseTable rows={rows} />
         <Typography variant="caption">pokébase_id: {pokemon.id}</Typography>
       </DialogContent>

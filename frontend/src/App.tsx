@@ -1,30 +1,16 @@
-import React, { createContext, useState } from "react";
+import React, { createContext } from "react";
 import Header from "./nav/Header";
 import Content from "./body/Content";
 import SideBar from "./sidebar/SideBar";
 import {
   ApolloClient,
-  InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
 import { makeStyles } from "@material-ui/core";
-import PopulateDB from "./populateDB/PopulateDB";
-import { relayStylePagination } from "@apollo/client/utilities";
-import { Provider, useSelector } from "react-redux";
+import { Provider} from "react-redux";
 import termReducer from "./reducers/termReducer";
 import { createStore } from "redux";
-
-
-
-const cache = new InMemoryCache({
-  typePolicies: {
-      Query: {
-          fields: {
-              returnAllPokemon: relayStylePagination()
-          },
-      },
-  },
-});
+import { cache } from "./cache/realstyleCache";
 
 export const SearchTermContext = createContext(null);
 /* Styles */

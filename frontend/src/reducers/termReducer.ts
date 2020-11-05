@@ -8,7 +8,7 @@ const defaultState = {
 
 export default function termReducer(state = defaultState, action: any) {
 switch (action.type) {
-    case "CHANGE_TERM": 
+    case CHANGE_TERM: 
         return { 
             ...state,  
             term: action.payload
