@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
@@ -131,7 +131,7 @@ function PokemonDialog(props: any) {
         Pokédex #{pokemon.pokemonID}
       </DialogTitle>
       <DialogContent dividers className={classes.dialogContent}>
-        <img className={classes.dialogContentImage} src={pokemon.image} />
+        <img className={classes.dialogContentImage} src={pokemon.image} alt={"picrute of" + pokemon.name} />
         <DenseTable rows={rows} />
         <Typography variant="caption">pokébase_id: {pokemon.id}</Typography>
       </DialogContent>

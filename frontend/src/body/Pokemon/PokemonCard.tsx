@@ -40,6 +40,7 @@ function PokemonCard(props: any) {
         className={classes.pokemonCardImage}
         src={props.image}
         width="150px"
+        alt={"Picture of " + props.name}
       />
     </div>
   );
