@@ -108,7 +108,7 @@ function createData(name: string, value: string) {
 //PokemonDialog, return the fetched pokemon information
 function PokemonDialog(props: any) {
   const classes = useStyles();
-  const [ getPokemon, {loading, error, data} ] = useLazyQuery(
+  const [ getPokemon, {loading, error, data, called} ] = useLazyQuery(
     GET_SINGLE_POKEMON
   );
 
@@ -118,7 +118,7 @@ function PokemonDialog(props: any) {
     })
   }, [props.open, getPokemon, props.id])
 
-  if (loading || !props.open) return <p>Loading...</p>;
+  if (loading || ! called) return <p>Loading...</p>;
   if (error) return <p>Error ${error.message}</p>;
   const pokemon = data.returnSinglePokemon
   const rows = [

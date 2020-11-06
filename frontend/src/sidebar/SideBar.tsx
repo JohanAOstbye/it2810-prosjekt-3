@@ -1,6 +1,7 @@
 import React from "react";
-import { AppBar, List, ListItem, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Divider, List, ListItem, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import Login from "./Login";
 
 const useStyles = makeStyles(() => ({
   typographyStyles: {
@@ -9,7 +10,7 @@ const useStyles = makeStyles(() => ({
   sideBar: {
     margin: "0.5rem",
     display: "flex",
-    maxWidth: "10rem"
+    maxWidth: "12rem"
   },
   toolBar: {
     display: "flex",
@@ -54,6 +55,10 @@ const SideBar = () => {
   return (
     <AppBar position="static" className={classes.sideBar}>
       <Toolbar className={classes.toolBar}>
+        <Login/>
+        <List>
+        <Divider/>
+      </List>
         <Typography className={classes.typographyStyles} variant="h5">
           Links
         </Typography>
