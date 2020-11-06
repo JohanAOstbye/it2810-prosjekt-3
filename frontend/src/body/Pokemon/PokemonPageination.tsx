@@ -3,6 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 // import { makeStyles } from "@material-ui/core/styles";
 import PokemonList from "./PokemonList";
 import { useSelector } from "react-redux";
+import { Button } from "@material-ui/core";
 /* Styles */
 
 //Styles for PokemonCard and PokemonContainer
@@ -20,14 +21,38 @@ import { useSelector } from "react-redux";
 
 /* Queries */
 
-//Return all pokemon
+//Return pokemon by search
 const RETURN_POKEMON_BY_SEARCH = gql`
   query returnAllPokemon($after: String, $name: String!) {
     returnAllPokemon(
-      orderby: "pokemonID"
       filter: { name: $name }
       data: { first: 20, after: $after }
-      filter: { name: $term }
+      orderby: "pokemonID"
+    ) {
+      edges {
+        cursor
+        node {
+          id
+          pokemonID
+          name
+          image
+        }
+      }
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+    }
+  }
+`;
+
+const RETURN_ALL_POKEMON = gql`
+  query returnAllPokemon($after: String) {
+    returnAllPokemon(
+      filter: {}
+      data: { first: 20, after: $after }
       orderby: "pokemonID"
     ) {
       edges {
@@ -56,22 +81,28 @@ const RETURN_POKEMON_BY_SEARCH = gql`
 //   }
 
 // Container which returns PokemonCards
-function PokemonPageination(props: any) {
-  const term = useSelector((state:{term:String}) => state.term)
-  console.log("shearching for: ", term)
-  const { data, loading, fetchMore, error } = useQuery(
+function PokemonPageination() {
+  const term = useSelector((state:{term:String}) => state.term);
+  console.log("Searching for: ", term);
+
+  //const { data, loading, fetchMore } = useQuery(RETURN_ALL_POKEMON); // all pokemon
+
+  const { data, loading, fetchMore, refetch, error } = useQuery( // all pokemon with name == term
     RETURN_POKEMON_BY_SEARCH,
     {
-      variables: {name:""},
+      variables: {name: term},
     }
-  ); // all pokemon
-
-  if (loading) return <p>Loading</p>;
-
+  ); 
+    
+  
+    if (loading) return <p>Loading</p>;
   if (data === undefined) return <p>graphql is not working</p>;
-
+  
   return (
     <div>
+
+      <Button onClick={() => refetch()}>Refetch</Button>
+
       <PokemonList
         loading={loading}
         entries={data.returnAllPokemon.edges.map((edge: { node: any; }) => edge.node)}
