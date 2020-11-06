@@ -20,6 +20,7 @@ export class UserResolver {
   @Query((_returns) => User)
   async login(@Arg("data") { username, password }: UserLoginInput) {
     const user = await UserModel.findOne({ username, password });
+    return user;
   }
 
   @Query(() => UserResponse)
@@ -37,6 +38,46 @@ export class UserResolver {
   }
 
   // @Query(() => PokemonResponse)
+  @Query(() => PokemonResponse)
+  async returnPokedex(
+    @Arg("userId") userid: String,
+    @Arg("data") args: ConnectionArgs,
+    @Arg("filter")
+    {
+      maxPokemonId,
+      minPokemonId,
+      name,
+      maxWeight,
+      minWeight,
+      maxHeight,
+      minHeight,
+    }: PokemonFilter,
+    @Arg("orderby") orderBy: String
+  ): Promise<PokemonResponse> {
+    const { offset } = args.pagingParams();
+    const founduser = await UserModel.findById({_id: userid})
+    if(!founduser) {
+      throw new Error("could not find user")
+    }
+    const pokedex = founduser.pokedex.filter(
+      pokemon => filterPokemon(pokemon, {
+        maxPokemonId,
+        minPokemonId,
+        name,
+        maxWeight,
+        minWeight,
+        maxHeight,
+        minHeight,
+      })
+    ).sort(dynamicSort(orderBy.toString()))
+    const page = Relay.connectionFromArraySlice(pokedex, args, {
+      arrayLength: pokedex.length,
+      sliceStart: offset || 0,
+    });
+
+    return page;
+  }
+
   @FieldResolver(() => PokemonResponse)
   async pokedex(
     @Root() user: User,
@@ -82,6 +123,9 @@ export class UserResolver {
     @Arg("data") { username, email, password }: UserInput
   ): Promise<User> {
     const pokedex: Pokemon[] = [];
+    if ( UserModel.find({username}) !== undefined) {
+      throw new Error("username in use")
+    }
     const user = (
       await UserModel.create({
         username,

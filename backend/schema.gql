@@ -96,6 +96,7 @@ type Query {
   login(data: UserLoginInput!): User!
   returnAllPokemon(data: ConnectionArgs!, filter: PokemonFilter!, orderby: String!): PokemonResponse!
   returnAllUsers(data: ConnectionArgs!): UserResponse!
+  returnPokedex(data: ConnectionArgs!, filter: PokemonFilter!, orderby: String!, userId: String!): PokemonResponse!
   returnSinglePokemon(id: String!): Pokemon!
   returnSinglePokemonStat(id: String!): PokemonStat!
   returnSingleUser(id: String!): User!

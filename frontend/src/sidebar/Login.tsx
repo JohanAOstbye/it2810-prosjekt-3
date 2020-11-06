@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { ApolloError, gql, useLazyQuery, useMutation } from '@apollo/client'
 import { Button, makeStyles, TextField, Typography } from '@material-ui/core'
 import React, { Dispatch, SetStateAction, useState } from 'react'
 
@@ -17,6 +17,12 @@ class User {
     email: String = ''
 }
 
+class ReturnUser {
+    id: String | undefined
+    username: String | undefined
+    email: String | undefined
+}
+
 /* Helperfunctions */
 function setProperty<T, K extends keyof T>(obj: T, key: K, value: T[K]) {
     obj[key] = value
@@ -26,38 +32,33 @@ function setProperty<T, K extends keyof T>(obj: T, key: K, value: T[K]) {
 
 const REGISTER_USER = gql`
 mutation registerUser(
-        {
             $username: String!,
             $password: String!,
             $email: String!
-        }
     ) {
     registerUser(
         data: {
             username: $username,
-            password: $username,
-            email: $username
+            password: $password,
+            email: $email
         }
     ) {
         id,
         username,
-        email,
-        pokedex
+        email
     }
 }
 `
 
-const Login_USER = gql`
+const LOGIN_USER = gql`
 query login(
-        {
             $username: String!,
             $password: String!
-        }
     ) {
     login(
         data: {
             username: $username,
-            password: $username
+            password: $password
         }
     ) {
         id,
@@ -78,6 +79,19 @@ const Login = () => {
         Dispatch<SetStateAction<boolean | undefined>>,
     ] = useState()
 
+    const dispatchUser = (data: any) => {
+        let user: ReturnUser = new ReturnUser();
+        if (data.login) {
+            user = data.login
+        } else if(data.registerUser) {
+            user = data.registerUser
+        }
+        console.log("redux this shit pls: ", user)
+    }
+
+    const [register] = useMutation(REGISTER_USER, { onCompleted: dispatchUser});
+    const [login] = useLazyQuery(LOGIN_USER, { onCompleted: dispatchUser });
+
     function updateUser(
         key: 'username' | 'password' | 'confirmPassword' | 'email',
         value: String,
@@ -90,25 +104,42 @@ const Login = () => {
             tempUser.password === tempUser.confirmPassword
         ) {
             setMatch(true)
-        } else {
+        } else if (tempUser.confirmPassword !== "") {
             setMatch(false)
+        } else {
+            setMatch(undefined)
         }
         setUser(tempUser)
     }
 
+    const handleError = (error:ApolloError) => {
+
+    }
+
     const handleUser = () => {
-        if (passwordsMatch) {
-            if (!showRegister) {
-                //loginquery
-            } else {
-                //registerquery
-            }
+        if (!showRegister && user.password !== "") {
+            console.log("logging in user:", user)
+            login({
+                variables: {
+                    username: user.username,
+                    password: user.password
+                }
+            })
+        } else if (passwordsMatch) {
+            console.log("registering in user:", user)
+            register({
+                variables: {
+                    username: user.username,
+                    password: user.password,
+                    email: user.email
+                }
+            })
         }
     }
 
     const getError = () => {
         if (passwordsMatch !== undefined) {
-            return passwordsMatch
+            return !passwordsMatch
         }
         return false
     }
@@ -176,7 +207,7 @@ const Login = () => {
                 color="inherit"
                 size="large"
                 onClick={() => {
-                    handleUser()
+                    handleUser();
                 }}
                 fullWidth
             >
@@ -187,7 +218,7 @@ const Login = () => {
                 size="large"
                 onClick={() => {
                     setRegister(!showRegister)
-                    updateUser('password', '')
+                    updateUser('confirmPassword', '')
                 }}
                 fullWidth
             >
