@@ -10,8 +10,14 @@ import { Pokemon, PokemonModel, PokemonResponse } from "../entities/Pokemon";
 import { PokemonFilter, PokemonInput } from "./types/Pokemon-input";
 import { PokemonStat, PokemonStatModel } from "../entities/PokemonStat";
 import { PokemonStatInput } from "./types/PokemonStat-input";
-import ConnectionArgs, { OrderByArgs } from "../utils/ConnectionArgs";
+import ConnectionArgs from "../utils/ConnectionArgs";
 import * as Relay from "graphql-relay";
+
+class Filter {
+  pokemonId?: { $lte?: number, $gte?: number};
+  weight?: { $lte?: number, $gte?: number};
+  height?: { $lte?: number, $gte?: number};
+}
 
 @Resolver((of) => Pokemon)
 export class PokemonResolver {
@@ -42,12 +48,7 @@ export class PokemonResolver {
     }: PokemonFilter,
     @Arg("orderby") key: String
   ): Promise<PokemonResponse> {
-    let filter: {
-      pokemonId?: { $lte?: number, $gte?: number};
-      name?: String;
-      weight?: { $lte?: number, $gte?: number};
-      height?: { $lte?: number, $gte?: number};
-    } = {};
+    let filter: Filter = {};
     // setting filter for id
     if (maxPokemonId || minPokemonId) {
       filter.pokemonId = {};
@@ -80,15 +81,16 @@ export class PokemonResolver {
     }
 
     // setting filter for name
+    let regex = new RegExp("", "i")
     if(name) {
-      filter.name = name
+      regex = new RegExp(name, "i")
     }
 
     let { offset } = args.pagingParams();
     if(offset == undefined) {
       offset = 0
     }
-    const pokemons = await PokemonModel.find(filter).sort(key);
+    const pokemons = (await PokemonModel.find(filter).sort(key)).filter(pokemon => {return regex.test(pokemon.name.toString())});
     console.log("finding Pokomon after index: " + offset);
     pokemons.splice(0,offset)
     const page = Relay.connectionFromArraySlice(pokemons, args, {

@@ -1,6 +1,8 @@
 import { ApolloError, gql, useLazyQuery, useMutation } from '@apollo/client'
 import { Button, makeStyles, TextField, Typography } from '@material-ui/core'
 import React, { Dispatch, SetStateAction, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import User from '../helperClasses/user'
 
 /* Styles */
 const useStyles = makeStyles(() => ({
@@ -10,17 +12,11 @@ const useStyles = makeStyles(() => ({
 }))
 
 /* Helperclass */
-class User {
+class InputUser {
     username: String = ''
     password: String = ''
     confirmPassword: String = ''
     email: String = ''
-}
-
-class ReturnUser {
-    id: String | undefined
-    username: String | undefined
-    email: String | undefined
 }
 
 /* Helperfunctions */
@@ -69,7 +65,7 @@ query login(
 `
 
 const Login = () => {
-    const newUser: User = new User()
+    const newUser: InputUser = new InputUser()
 
     const classes = useStyles()
     const [showRegister, setRegister] = useState(false)
@@ -78,15 +74,20 @@ const Login = () => {
         boolean | undefined,
         Dispatch<SetStateAction<boolean | undefined>>,
     ] = useState()
+    const [errormessage, setErrormessage]: [
+        string | undefined,
+        Dispatch<SetStateAction<string | undefined>>,
+    ] = useState()
+  const dispatch = useDispatch()
 
     const dispatchUser = (data: any) => {
-        let user: ReturnUser = new ReturnUser();
+        let user: User = new User()
         if (data.login) {
             user = data.login
         } else if(data.registerUser) {
             user = data.registerUser
         }
-        console.log("redux this shit pls: ", user)
+        dispatch({type: "AUTH_USER", payload: user })
     }
 
     const [register] = useMutation(REGISTER_USER, { onCompleted: dispatchUser});
@@ -96,7 +97,7 @@ const Login = () => {
         key: 'username' | 'password' | 'confirmPassword' | 'email',
         value: String,
     ) {
-        let tempUser: User = user
+        let tempUser: InputUser = user
         setProperty(tempUser, key, value)
         if (
             tempUser.password !== '' &&

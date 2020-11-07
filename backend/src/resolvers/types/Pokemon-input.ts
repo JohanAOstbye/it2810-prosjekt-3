@@ -36,7 +36,7 @@ export class PokemonFilter {
   minPokemonId?: number;
 
   @Field(() => String, { nullable: true })
-  name?: String;
+  name?: string;
   
   @Field(() => Int, { nullable: true })
   maxWeight?: number;

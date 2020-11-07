@@ -1,28 +1,30 @@
+import Filter from './../helperClasses/filter'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 const SearchBar = () => {
-  const [text, setText] = useState('')
+  const [name, setName] = useState('')
   const dispatch = useDispatch()
 
-  const handleSubmit = (e:any) => {
-    const text = e.target.value.trim();
+  const handleSubmit = (e: any) => {
+    let filter: Filter = new Filter();
+    filter.name = e.target.value.trim();
     // If the user pressed the Enter key:
-    if (e.which === 13 && text) {
-      // Dispatch the "todo added" action with this text
-      dispatch({ type: 'CHANGE_TERM', payload: text })
-      // And clear out the text input
-      setText('')
+    if (e.which === 13 && filter.name) {
+      // Dispatch the "todo added" action with this name
+      dispatch({ type: 'CHANGE_FILTER', payload: filter })
+      // And clear out the name input
+      setName('')
     }
   }
 
   return (
     <input
-      type="text"
+      type="name"
       placeholder="Search Pokébase..."
       autoFocus={true}
-      value={text}
-      onChange={(e) => setText(e.target.value)}
+      value={name}
+      onChange={(e) => setName(e.target.value)}
       onKeyDown={(e) => handleSubmit(e)}
     />
   )

@@ -3,20 +3,6 @@ import { useQuery, gql } from "@apollo/client";
 // import { makeStyles } from "@material-ui/core/styles";
 import PokemonList from "./PokemonList";
 import { useSelector } from "react-redux";
-/* Styles */
-
-//Styles for PokemonCard and PokemonContainer
-// const useStyles = makeStyles(() => ({
-//   pokemonContainer: {
-//     display: "flex",
-//     flexDirection: "row",
-//     flexWrap: "wrap",
-//     paddingTop: "1rem",
-//     justifyContent: "center",
-//     alignContent: "center",
-//     alignItems: "center",
-//   },
-// }));
 
 /* Queries */
 
@@ -46,12 +32,6 @@ const RETURN_POKEMON_BY_SEARCH = gql`
     }
   }
 `;
-
-// pageData{
-//     count,
-//     limit,
-//     offset
-//   }
 
 // Container which returns PokemonCards
 function PokemonPageination(props: any) {
@@ -87,21 +67,5 @@ function PokemonPageination(props: any) {
     </div>
   );
 }
-
-/*<PokemonList
-        loading={loading}
-        entries={data.returnAllPokemon.edges.map(
-          (edge: { node: any }) => edge.node
-        )}
-        onLoadMore={() => {
-          fetchMore({
-            variables: {
-              after: data.returnAllPokemon.pageInfo.endCursor,
-            },
-          });
-        }}
-        error={error}
-        end={data.returnAllPokemon.pageInfo.hasNextPage}
-      ></PokemonList>*/
 
 export default PokemonPageination;

@@ -8,15 +8,11 @@ import {
 } from "@apollo/client";
 import { makeStyles } from "@material-ui/core";
 import { Provider} from "react-redux";
-import termReducer from "./reducers/termReducer";
-import { createStore } from "redux";
 import { cache } from "./cache/realstyleCache";
+import store from "./store"
 
 export const SearchTermContext = createContext(null);
 /* Styles */
-
-
-const store = createStore(termReducer);
 
 const useStyles = makeStyles(() => ({
   app: {
@@ -36,24 +32,6 @@ const client = new ApolloClient({
   uri: "http://localhost:3333/graphql", 
   cache: cache
 });
-
-console.log('Initial State:', store.getState())
-
-const unsubscribe = store.subscribe(() =>
-  console.log('State after dispatch: ', store.getState())
-)
-
-store.dispatch({
-  type: "CHANGE_TERM",
-  payload: "lmaooo"
-});
-
-store.dispatch({
-  type: "CHANGE_TERM",
-  payload: "xD"
-});
-
-unsubscribe();
 
 export default function App() {
   const classes = useStyles();

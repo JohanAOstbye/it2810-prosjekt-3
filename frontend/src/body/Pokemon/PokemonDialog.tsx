@@ -107,6 +107,7 @@ function createData(name: string, value: string) {
 
 //PokemonDialog, return the fetched pokemon information
 function PokemonDialog(props: any) {
+  
   const classes = useStyles();
   const [ getPokemon, {loading, error, data, called} ] = useLazyQuery(
     GET_SINGLE_POKEMON
@@ -129,16 +130,17 @@ function PokemonDialog(props: any) {
   ];
 
   return(
-    <Dialog onClose={props.handleClose} open={props.open}>
+    <div>
       <DialogTitle>
         Pokédex #{pokemon.pokemonID}
       </DialogTitle>
       <DialogContent dividers className={classes.dialogContent}>
         <img className={classes.dialogContentImage} src={pokemon.image} alt={"picrute of" + pokemon.name} />
         <DenseTable rows={rows} />
+        {}
         <Typography variant="caption">pokébase_id: {pokemon.id}</Typography>
       </DialogContent>
-    </Dialog>
+    </div>
   );
 }
 
