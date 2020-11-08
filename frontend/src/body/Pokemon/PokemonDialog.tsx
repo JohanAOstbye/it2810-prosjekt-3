@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
-import Dialog from "@material-ui/core/Dialog";
+import React, { useEffect, useState } from "react";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { gql, useLazyQuery} from "@apollo/client";
+import { gql, useLazyQuery, useMutation} from "@apollo/client";
 import theme from "../../theme";
 import {
   withStyles,
   makeStyles,
 } from "@material-ui/core/styles";
 import DenseTable from "../DenseTable";
+import { useSelector } from "react-redux";
+import ReduxState from "../../helperClasses/state";
+import { Button } from "@material-ui/core";
 
 
 /* Styles */
@@ -72,6 +74,22 @@ query ($id: String!){
 }
 `;
 
+const ADD_POKEMON = gql`
+mutation (
+  $userID: String!,
+  $pokemonID: String!
+) {
+  addPokemon(
+    data:{
+      userID: $userID, 
+      pokemonID:$pokemonID
+    }
+  ) {
+    id
+  }
+}
+`;
+
 // DialogTitle, returns a Custom Title
 function DialogTitle(props: any){
   const { children, onClose, ...other } = props;
@@ -107,10 +125,18 @@ function createData(name: string, value: string) {
 
 //PokemonDialog, return the fetched pokemon information
 function PokemonDialog(props: any) {
+
+  const user = useSelector((state: ReduxState) => state.user)
   
+  const [added, setAdded] = useState(false)
+
   const classes = useStyles();
+
   const [ getPokemon, {loading, error, data, called} ] = useLazyQuery(
     GET_SINGLE_POKEMON
+  );
+  const [ addPokemon ] = useMutation(
+    ADD_POKEMON, { onCompleted:(() => setAdded(true)) }
   );
 
   useEffect(()=> {
@@ -129,6 +155,15 @@ function PokemonDialog(props: any) {
     createData("Weight", pokemon.weight),
   ];
 
+  const handleAdd = () => {
+    if(user && pokemon) {
+      addPokemon({variables:{
+        userID: user.id,
+        pokemonID: pokemon.id
+      }})
+    }
+  }
+
   return(
     <div>
       <DialogTitle>
@@ -137,8 +172,17 @@ function PokemonDialog(props: any) {
       <DialogContent dividers className={classes.dialogContent}>
         <img className={classes.dialogContentImage} src={pokemon.image} alt={"picrute of" + pokemon.name} />
         <DenseTable rows={rows} />
-        {}
+        {user ? (
+          added ? (null): (
+          <Button
+              size="large"
+              onClick={handleAdd}
+              fullWidth>
+          Register pokemon to pokedex
+        </Button>)
+        ) : (null)}
         <Typography variant="caption">pokébase_id: {pokemon.id}</Typography>
+
       </DialogContent>
     </div>
   );

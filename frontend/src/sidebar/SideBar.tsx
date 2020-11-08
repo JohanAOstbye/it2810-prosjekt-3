@@ -1,7 +1,9 @@
 import React from "react";
-import { AppBar, Divider, List, ListItem, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Button, Divider, List, ListItem, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Login from "./Login";
+import { useDispatch, useSelector } from "react-redux";
+import ReduxState from "../helperClasses/state";
 
 const useStyles = makeStyles(() => ({
   typographyStyles: {
@@ -24,7 +26,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function SideBarList(){
+function SideBarList() {
   const classes = useStyles();
   return (
     <div className={classes.sideBarList}>
@@ -41,7 +43,7 @@ function SideBarList(){
   );
 }
 
-function Footer(){
+function Footer() {
   const classes = useStyles();
   return (
     <Typography className={classes.typographyStyles} >
@@ -52,21 +54,40 @@ function Footer(){
 
 const SideBar = () => {
   const classes = useStyles();
+
+  const user = useSelector((state: ReduxState) => state.user)
+  if (user) {
+    console.log("from state", user)
+  }
+  const dispatch = useDispatch()
+
   return (
     <AppBar position="static" className={classes.sideBar}>
       <Toolbar className={classes.toolBar}>
-        <Login/>
-        <List>
-        <Divider/>
+        {user ? (
+          <div>
+            Welcome, {user.username}<br></br>
+            <Button
+              color="inherit"
+              size="large"
+              onClick={() => {dispatch({ type: "AUTH_USER", payload: user })}}
+              fullWidth>
+              Logout
+            </Button>
+          </div>
+        ) : (<Login />)
+        }
+      <List>
+        <Divider />
       </List>
-        <Typography className={classes.typographyStyles} variant="h5">
-          Links
+      <Typography className={classes.typographyStyles} variant="h5">
+        Links
         </Typography>
 
-        <SideBarList/>
-        <Footer/>
+      <SideBarList />
+      <Footer />
       </Toolbar>
-    </AppBar>
+    </AppBar >
   );
 }
 

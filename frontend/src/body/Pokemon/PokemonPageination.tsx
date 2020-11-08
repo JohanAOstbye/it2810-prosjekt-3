@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 // import { makeStyles } from "@material-ui/core/styles";
 import PokemonList from "./PokemonList";
 import { useSelector } from "react-redux";
+import ReduxState from "../../helperClasses/state";
 
 /* Queries */
 
@@ -34,15 +35,19 @@ const RETURN_POKEMON_BY_SEARCH = gql`
 `;
 
 // Container which returns PokemonCards
-function PokemonPageination(props: any) {
-  const term = useSelector((state:{term:String}) => state.term)
-  console.log("shearching for: ", term)
-  const { data, loading, fetchMore, error } = useQuery(
+function PokemonPageination() {
+  const name = useSelector((state:ReduxState) => state.filter.name)
+  console.log("shearching for: ", name)
+  const { data, loading, fetchMore, error ,refetch} = useQuery(
     RETURN_POKEMON_BY_SEARCH,
     {
-      variables: {name:""},
+      variables: {name:name},
     }
   ); // all pokemon
+
+  useEffect(() => {
+    refetch()
+  }, [name])
 
   if (loading) return <p>Loading</p>;
 
