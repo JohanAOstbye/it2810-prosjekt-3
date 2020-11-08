@@ -1,26 +1,108 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Header from "./nav/Header";
+import Content from "./body/Content";
+import SideBar from "./sidebar/SideBar";
+import {
+  ApolloClient,
+  ApolloProvider,
+} from "@apollo/client";
+import { makeStyles } from "@material-ui/core";
+import { Provider} from "react-redux";
+import { cache } from "./cache/realstyleCache";
+import store from "./store"
 
-function App() {
+/* Styles */
+
+const useStyles = makeStyles(() => ({
+  app: {
+    minHeight: "100vh",
+    backgroundColor: "teal",
+    display: "flex",
+    flexDirection: "column",
+  },
+  appContent: {
+    display: "flex",
+    flexDirection: "row",
+    flexGrow: 1,
+  }
+}));
+
+const client = new ApolloClient({
+  uri: "http://localhost:3333/graphql", 
+  cache: cache
+});
+
+export default function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <div className={classes.app}>
+          <Header />
+          <div className={classes.appContent}>
+            <Content />
+            <SideBar />
+          </div>
+        </div>
+      </Provider>
+    </ApolloProvider>
   );
 }
 
-export default App;
+
+
+
+
+
+/*
+import { configureStore } from '@reduxjs/toolkit'
+
+function Counter() {
+  // State: a counter value
+  const [counter, setCounter] = useState(0)
+
+  // Action: code that causes an update to the state when something happens
+  const increment = () => {
+    setCounter(prevCounter => prevCounter + 1)
+  }
+
+  // View: the UI definition
+  return (
+    <div>
+      Value: {counter} <button onClick={increment}>Increment</button>
+    </div>
+  )
+}
+
+const initialState = { value: 0 }
+
+function counterReducer(state = initialState, action:any) {
+  // Check to see if the reducer cares about this action
+  if (action.type === 'counter/increment') {
+    // If so, make a copy of `state`
+    return {
+      ...state,
+      // and update the copy with the new value
+      value: state.value + 1
+    }
+  }
+  // otherwise return the existing state unchanged
+  return state
+}
+
+const store = configureStore({ reducer: counterReducer })
+
+console.log(store.getState())
+
+store.dispatch({ type: 'counter/increment' })
+console.log(store.getState())
+
+const increment = () => {
+  return {
+    type: 'counter/increment'
+  }
+}
+store.dispatch(increment())
+console.log(store.getState())
+*/
