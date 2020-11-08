@@ -1,4 +1,4 @@
-import { ApolloError, gql, useLazyQuery, useMutation } from '@apollo/client'
+import { gql, useLazyQuery, useMutation } from '@apollo/client'
 import { Button, makeStyles, TextField, Typography } from '@material-ui/core'
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -74,23 +74,20 @@ const Login = () => {
         boolean | undefined,
         Dispatch<SetStateAction<boolean | undefined>>,
     ] = useState()
-    const [errormessage, setErrormessage]: [
-        string | undefined,
-        Dispatch<SetStateAction<string | undefined>>,
-    ] = useState()
-  const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     const dispatchUser = (data: any) => {
         let user: User = new User()
         if (data.login) {
             user = data.login
-        } else if(data.registerUser) {
+        } else if (data.registerUser) {
             user = data.registerUser
         }
-        dispatch({type: "AUTH_USER", payload: user })
+        console.log("dispatcing", user)
+        dispatch({ type: "AUTH_USER", payload: user })
     }
 
-    const [register] = useMutation(REGISTER_USER, { onCompleted: dispatchUser});
+    const [register] = useMutation(REGISTER_USER, { onCompleted: dispatchUser });
     const [login] = useLazyQuery(LOGIN_USER, { onCompleted: dispatchUser });
 
     function updateUser(
@@ -111,10 +108,6 @@ const Login = () => {
             setMatch(undefined)
         }
         setUser(tempUser)
-    }
-
-    const handleError = (error:ApolloError) => {
-
     }
 
     const handleUser = () => {

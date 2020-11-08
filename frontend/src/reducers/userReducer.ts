@@ -1,19 +1,16 @@
+import User from "../helperClasses/user";
 import { AUTH_USER } from "./../actions/types";
 
-class User {
-  id: String | undefined;
-  username: String | undefined;
-  email: String | undefined;
-}
+const initialUser: User | null = null;
 
-const user: User | null = null;
-
-export default function userReducer(state = user, action: any) {
+export default function userReducer(state = initialUser, action: any) {
   switch (action.type) {
     case AUTH_USER:
       return {
         ...state,
-        user: action.payload,
+        username: action.payload.username,
+        email: action.payload.email,
+        id: action.payload.id
       };
     default:
       return state;

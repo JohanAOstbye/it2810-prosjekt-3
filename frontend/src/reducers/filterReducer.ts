@@ -3,9 +3,9 @@ import {
     CHANGE_FILTER
 } from './../actions/types';
 
-const initialState: Filter = {
+export const initialState: Filter = {
     pokemonId: { $lte: null, $gte: null},
-    name: { $regex: "" },
+    name: "",
     weight: { $lte: null, $gte: null},
     height: { $lte: null, $gte: null}
   }
@@ -17,7 +17,7 @@ switch (action.type) {
         return { 
             ...state,  
             pokemonId: action.payload.pokemonId,
-            name:{ $regex: action.payload.name },
+            name: action.payload.name,
             weight: action.payload.weight,
             height: action.payload.height
         }

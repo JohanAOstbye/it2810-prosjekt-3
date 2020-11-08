@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React from "react";
 import Header from "./nav/Header";
 import Content from "./body/Content";
 import SideBar from "./sidebar/SideBar";
@@ -11,7 +11,6 @@ import { Provider} from "react-redux";
 import { cache } from "./cache/realstyleCache";
 import store from "./store"
 
-export const SearchTermContext = createContext(null);
 /* Styles */
 
 const useStyles = makeStyles(() => ({
