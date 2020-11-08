@@ -19,7 +19,12 @@ export class UserResolver {
 
   @Query((_returns) => User)
   async login(@Arg("data") { username, password }: UserLoginInput) {
+    console.log(username, password)
     const user = await UserModel.findOne({ username, password });
+    if (!user) {
+      throw new Error("Wrong username or password")
+    }
+    console.log("found user: ", user)
     return user;
   }
 
@@ -123,7 +128,9 @@ export class UserResolver {
     @Arg("data") { username, email, password }: UserInput
   ): Promise<User> {
     const pokedex: Pokemon[] = [];
-    if ( UserModel.find({username}) !== undefined) {
+    const testUser = await UserModel.findOne({username})
+    console.log(testUser)
+    if ( testUser ) {
       throw new Error("username in use")
     }
     const user = (
@@ -134,6 +141,7 @@ export class UserResolver {
         pokedex,
       })
     ).save();
+    console.log("Registered user: ", user)
     return user;
   }
 
@@ -145,6 +153,15 @@ export class UserResolver {
     if (!pokemon) {
       throw new Error("no pokemon with id " + pokemonID);
     }
+    const testUser = await UserModel.findById({_id: userID})
+    if (!testUser) {
+      throw Error("no user with id " + userID);
+    }
+    if(testUser.pokedex.some(pokemon => pokemon.id === pokemonID)) {
+      console.log("fant pokemonen i brukeren fra førav")
+      return testUser;//kunne evt fjernet den
+    }
+
     const user = await UserModel.findByIdAndUpdate(
       userID,
       { $push: { pokedex: pokemon } },
