@@ -47,7 +47,7 @@ function PopulateDB() {
     }
 
     const fetchPokemons = async () => {
-        for(let i = 1; i < 451; i++) {
+        for(let i = 1; i <= 898; i++) {
             await fetchAndStorePokemon(i);
         }
     }

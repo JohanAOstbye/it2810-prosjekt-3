@@ -3,6 +3,9 @@ import PokemonPageination from "./Pokemon/PokemonPageination";
 import WelcomeComponent from "./WelcomeComponent";
 import { makeStyles } from "@material-ui/styles";
 import SearchBar from "./SearchBar";
+import ReduxState from "../helperClasses/state";
+import { useSelector } from "react-redux";
+import Pokedex from "./Pokemon/Pokedex";
 //const [input, setInput] = useState(null);
 
 const useStyles = makeStyles(() => ({
@@ -16,14 +19,16 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-
 function Content() {
+  const user = useSelector((state:ReduxState) => state.user)
+  const pokedex = useSelector((state:ReduxState)=> state.pokedex)
   const classes = useStyles();
+
   return (
     <div className={classes.content}>
-      <WelcomeComponent />
+      <WelcomeComponent/>
       <SearchBar />
-      <PokemonPageination/>
+      {pokedex.show && user ? (<Pokedex id={user.id}/>) : (<PokemonPageination/>)}
     </div>
   );
 }

@@ -56,7 +56,7 @@ function PokemonList(props: any) {
     <div className={classes.pokemonContainer}>
       {pokemon.map((pokemon: any) => (
         <PokemonDialogWrapper
-          key={pokemon.id}
+          key={pokemon.id + props.extraKey}
           id={pokemon.id}
           pokemonID={pokemon.pokemonID}
           name={pokemon.name}
