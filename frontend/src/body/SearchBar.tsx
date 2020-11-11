@@ -62,7 +62,7 @@ const SearchBar = () => {
       <input
         type="name"
         placeholder="Search Pokébase..."
-        autoFocus={true}
+        autoFocus
         value={name}
         onChange={(e) => setName(e.target.value)}
         onKeyDown={(e) => handleSubmit(e)}
@@ -82,11 +82,11 @@ const SearchBar = () => {
         autoWidth
         labelId="sortingLabel"
       >
-        <MenuItem value={"pokemonID"}>Id</MenuItem>
-        <MenuItem value={"name"}>Name</MenuItem>
-        <MenuItem value={"base_experience"}>Experience</MenuItem>
-        <MenuItem value={"weight"}>Weight</MenuItem>
-        <MenuItem value={"height"}>Height</MenuItem>
+        <MenuItem value={"-pokemonID"}>Id</MenuItem>
+        <MenuItem value={"-name"}>Name</MenuItem>
+        <MenuItem value={"-base_experience"}>Experience</MenuItem>
+        <MenuItem value={"-weight"}>Weight</MenuItem>
+        <MenuItem value={"-height"}>Height</MenuItem>
       </Select>
     </div>
   )

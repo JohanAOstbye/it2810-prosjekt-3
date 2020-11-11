@@ -20,6 +20,8 @@
     "jsx": "react"
   },
   "include": [
-    "src", "__tests__"
+    "src", 
+    "src/__tests__",
+    "__tests__",
   ]
 }
