@@ -9,9 +9,9 @@
 ```
 $ git clone https://gitlab.stud.idi.ntnu.no/it2810-h20/team-29/prosjekt-3.git
 ```
-3. Open a terminal to start the backend
-    a. Navigate to `./backend`
-    b. Install dependencies 
+3. Open a terminal to start the backend  
+    a. Navigate to `./backend`  
+    b. Install dependencies  
     ```
     $ npm i
     ```
@@ -20,13 +20,13 @@ $ git clone https://gitlab.stud.idi.ntnu.no/it2810-h20/team-29/prosjekt-3.git
     $ npm run build-ts
     $ npm start
     ```
-4. Open a terminal to run the frontend
-    a. Navigate to `./frontend`
-    b. Install dependencies 
+4. Open a terminal to run the frontend  
+    a. Navigate to `./frontend`  
+    b. Install dependencies   
     ```
     $ npm i
     ```
-    c. Run locally with:
+    c. Run locally with:  
     ```
     $ npm start
     ```
