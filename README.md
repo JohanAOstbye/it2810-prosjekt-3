@@ -31,6 +31,54 @@ $ git clone https://gitlab.stud.idi.ntnu.no/it2810-h20/team-29/prosjekt-3.git
     $ npm start
     ```
 
+## Technology
+
+### Backend 
+
+A tech-stack with
+- GraphQL, implemented in Typescript (TypeGraphQL)
+- MongoDB
+    - with mongoose (typegoose)
+- Apollo
+    - with Express
+
+Most of us were familiear with REST API, but because of our previous troubles with this we went with graphQ. We saw this as a modern solution.
+We chose MongoDB because we wanted a noSQL database, aswell as it provides us with tons of documentation and libraries.
+
+
+### Frontend
+
+A tech-stack with
+- React, initialized with `create-react-app`, implemented in Typescript. 
+- Redux
+- Material-UI
+- ApolloClient
+
+We chose to use Material-UI for their intuitive to understand and well-documented libraries of components, and are very happy with our choice.
+
+We chose Redux over MobX mostly because our group wanted to learn it, because it is used professionally by a lot of companies.
+
+## Functionality
+### Content
+Pokébase(tm) is a single page application(SPA) where users can browse pokemon from all (8) generations. If they decide to register, they can log in and see their own personalized pokédex.
+
+### Search, filter and sorting
+The user is able to search for their favorite pokémon, and sort by a number of different parameters. They can also view all or certain generations of pokémon.
+
+### Detail on pokemon
+The user can click on any pokémon and see all data on it, they can also see our own ID of the pokemon if they wish to see more of the hidden data, listed only in MongoDB.
+
+### Responsive web design
+The app is responsive in a way that ensures the number of pokémon presented is always proportional to the size of the users viewport/screen size.
+
+## Testing
+
+### End-to-end
+((Fill in here))
+
+### Jest (Unit testing)
+((Fill in here))
+
 ## File Structure
 
 The app is divided into smaller components each with a single, or few, core task(s).
@@ -116,56 +164,6 @@ The app is divided into smaller components each with a single, or few, core task
     yarn.lock
 README.md
 ```
-
-## Technology
-
-### Backend 
-
-A tech-stack with
-- GraphQL, implemented in Typescript (TypeGraphQL)
-- MongoDB
-    - with mongoose (typegoose)
-- Apollo
-    - with Express
-
-Most of us were familiear with REST API, but because of our previous troubles with this we went with graphQ. We saw this as a modern solution.
-We chose MongoDB because we wanted a noSQL database, aswell as it provides us with tons of documentation and libraries.
-
-
-### Frontend
-
-A tech-stack with
-- React, initialized with `create-react-app`, implemented in Typescript. 
-- Redux
-- Material-UI
-- ApolloClient
-
-We chose to use Material-UI for their intuitive to understand and well-documented libraries of components, and are very happy with our choice.
-
-We chose Redux over MobX mostly because our group wanted to learn it, because it is used professionally by a lot of companies.
-
-### Functionality
-#### Content
-Pokébase(tm) is a single page application(SPA) where users can browse pokemon from all (8) generations. If they decide to register, they can log in and see their own personalized pokédex.
-
-#### Search, filter and sorting
-The user is able to search for their favorite pokémon, and sort by a number of different parameters. They can also view all or certain generations of pokémon.
-
-#### Detail on pokemon
-The user can click on any pokémon and see all data on it, they can also see our own ID of the pokemon if they wish to see more of the hidden data, listed only in MongoDB.
-
-
-#### Responsive web design
-
-The app is responsive in a way that ensures the number of pokémon presented is always proportional to the size of the users viewport/screen size.
-
-### Testing
-
-#### End-to-end
-((Fill in here))
-
-#### Jest (Unit testing)
-((Fill in here))
 
 
 ### References
