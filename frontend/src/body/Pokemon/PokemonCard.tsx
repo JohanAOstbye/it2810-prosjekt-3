@@ -37,6 +37,7 @@ function PokemonCard(props: any) {
       <Typography variant="h4">{props.pokemonID}</Typography>
       <Typography variant="h6">{props.name}</Typography>
       <img
+        data-testid = "pokemoncard"
         className={classes.pokemonCardImage}
         src={props.image}
         width="150px"

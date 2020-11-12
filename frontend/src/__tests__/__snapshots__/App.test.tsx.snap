@@ -1,0 +1,325 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="makeStyles-app-1"
+  >
+    <header
+      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary makeStyles-headerContainer-3 MuiPaper-elevation4"
+      color-variant="dark"
+    >
+      <div
+        class="MuiToolbar-root MuiToolbar-regular makeStyles-toolBarStyles-6 MuiToolbar-gutters"
+      >
+        <p
+          class="MuiTypography-root makeStyles-typographyStyles-5 MuiTypography-body1"
+        >
+          Pokébase
+        </p>
+      </div>
+    </header>
+    <div
+      class="makeStyles-appContent-2"
+    >
+      <div
+        class="makeStyles-content-7"
+      >
+        <div
+          class="makeStyles-subHeader-9"
+        >
+          <h4
+            class="MuiTypography-root makeStyles-subHeaderText-10 MuiTypography-h4"
+          >
+            Click on a Pokémon to learn more about it. You can also filter by searching for a specific one.
+          </h4>
+        </div>
+        <div
+          class="makeStyles-container-11"
+        >
+          <input
+            data-testid="searchbar"
+            placeholder="Search Pokébase..."
+            type="name"
+            value=""
+          />
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-animated"
+            id="sortingLabel"
+          >
+            Sort
+          </label>
+          <div
+            class="MuiInputBase-root MuiInput-root MuiInput-underline makeStyles-sortSelect-12"
+          >
+            <div
+              aria-haspopup="listbox"
+              aria-labelledby="sortingLabel"
+              class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+              role="button"
+              tabindex="0"
+            >
+              Id
+            </div>
+            <input
+              aria-hidden="true"
+              class="MuiSelect-nativeInput"
+              tabindex="-1"
+              value="pokemonID"
+            />
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSelect-icon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 10l5 5 5-5z"
+              />
+            </svg>
+          </div>
+        </div>
+        <p>
+          Loading
+        </p>
+      </div>
+      <header
+        class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary makeStyles-sideBar-14 MuiPaper-elevation4"
+      >
+        <div
+          class="MuiToolbar-root MuiToolbar-regular makeStyles-toolBar-15 MuiToolbar-gutters"
+        >
+          <div>
+            <h5
+              class="MuiTypography-root makeStyles-typographyStyles-17 MuiTypography-h5 MuiTypography-alignCenter"
+            >
+              Login
+            </h5>
+            <div
+              class="MuiFormControl-root MuiTextField-root"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled"
+                data-shrink="false"
+                for="username"
+                id="username-label"
+              >
+                Username
+              </label>
+              <div
+                class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-formControl"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiFilledInput-input"
+                  id="username"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              class="MuiFormControl-root MuiTextField-root"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-filled"
+                data-shrink="false"
+                for="password"
+                id="password-label"
+              >
+                Password
+              </label>
+              <div
+                class="MuiInputBase-root MuiFilledInput-root MuiFilledInput-underline MuiInputBase-formControl"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiFilledInput-input"
+                  id="password"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit MuiButton-textSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Login
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit MuiButton-textSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Register
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <ul
+            class="MuiList-root MuiList-padding"
+          >
+            <hr
+              class="MuiDivider-root"
+            />
+          </ul>
+          <h5
+            class="MuiTypography-root makeStyles-typographyStyles-13 MuiTypography-h5"
+          >
+            Generations
+          </h5>
+          <div
+            class="makeStyles-sideBarList-16"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit MuiButton-textSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                All Generations
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit MuiButton-textSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Generation 1
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit MuiButton-textSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Generation 2
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit MuiButton-textSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Generation 3
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit MuiButton-textSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Generation 4
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit MuiButton-textSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Generation 5
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit MuiButton-textSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Generation 6
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit MuiButton-textSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Generation 7
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit MuiButton-textSizeLarge MuiButton-sizeLarge MuiButton-fullWidth"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Generation 8
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <p
+            class="MuiTypography-root makeStyles-typographyStyles-13 MuiTypography-body1"
+          >
+            Laget av Johan, Sebastian og Christoffer (c)
+          </p>
+        </div>
+      </header>
+    </div>
+  </div>
+</DocumentFragment>
+`;

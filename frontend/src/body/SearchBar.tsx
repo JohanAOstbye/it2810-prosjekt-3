@@ -81,6 +81,7 @@ const SearchBar = () => {
       /> Show your pokedex </span>) : (<div className={classes.pokedex}/>)}
       <input
         className={classes.search}
+        data-testid = "searchbar"
         type="name"
         placeholder="Search Pokébase..."
         autoFocus
