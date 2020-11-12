@@ -124,7 +124,7 @@ const SideBar = () => {
     <AppBar position="static" className={classes.sideBar}>
       <Toolbar className={classes.toolBar}>
         {user ? (
-          <div>
+          <div className="login">
             Welcome, {user.username}<br></br>
             <Button
               color="inherit"

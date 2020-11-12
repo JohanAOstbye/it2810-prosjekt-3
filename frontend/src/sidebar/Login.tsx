@@ -149,7 +149,7 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div className="login">
             <Typography
                 className={classes.typographyStyles}
                 variant="h5"
@@ -198,6 +198,7 @@ const Login = () => {
                 </div>
             ) : null}
             <Button
+                id="btnSendUser"
                 color="inherit"
                 size="large"
                 onClick={() => {
@@ -208,6 +209,7 @@ const Login = () => {
                 {showRegister ? 'Register' : 'Login'}
             </Button>
             <Button
+                id="btnSwitchForm"
                 color="inherit"
                 size="large"
                 onClick={() => {

@@ -175,6 +175,7 @@ function PokemonDialog(props: any) {
         {user ? (
           added ? (null): (
           <Button
+              className="addPokemon"
               size="large"
               onClick={handleAdd}
               fullWidth>

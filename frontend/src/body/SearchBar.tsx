@@ -2,17 +2,30 @@ import Filter from './../helperClasses/filter'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ReduxState from '../helperClasses/state'
-import { InputLabel, makeStyles, MenuItem, Select, Switch } from '@material-ui/core'
+import { FormControl, InputLabel, makeStyles, MenuItem, Select, Switch } from '@material-ui/core'
 
 const useStyles = makeStyles({
   container: {
+    paddingRight: "0.5rem",
     display: 'flex',
-    justifyContent: 'center',
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   sortSelect: {
+    margin: "0.5rem",
+    flexGrow: 1,
     alignSelf: "flex-end"
   },
+  pokedex: {
+    margin: "0.5rem",
+    flexGrow: 1,
+    alignSelf: "flex-start"
+  },
+  search: {
+    margin: "0.5rem",
+    flexGrow: 4,
+    alignSelf: "center"
+  }
 });
 
 const SearchBar = () => {
@@ -40,17 +53,17 @@ const SearchBar = () => {
   const [orderby, setOrderby] = useState("pokemonID");
   const [show, setShow] = useState(false);
 
-  useEffect(()=>{
-    const filter = {...reduxFilter, orderby}
+  useEffect(() => {
+    const filter = { ...reduxFilter, orderby }
     dispatch({ type: 'CHANGE_FILTER', payload: filter });
-  },[orderby])
+  }, [orderby])
 
   useEffect(() => {
     dispatch({ type: 'SHOW_POKEDEX', payload: { show: show } });
   }, [show])
 
   const handleOrder = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setOrderby(event.target.value as string)   
+    setOrderby(event.target.value as string)
   }
 
 
@@ -59,7 +72,15 @@ const SearchBar = () => {
   }
   return (
     <div className={classes.container}>
+      {user ? (<span className={classes.pokedex}><Switch
+        checked={show}
+        onChange={handleChange}
+        color="primary"
+        name="checkedB"
+        inputProps={{ 'aria-label': 'primary checkbox' }}
+      /> Show your pokedex </span>) : (<div className={classes.pokedex}/>)}
       <input
+        className={classes.search}
         type="name"
         placeholder="Search Pokébase..."
         autoFocus
@@ -67,28 +88,22 @@ const SearchBar = () => {
         onChange={(e) => setName(e.target.value)}
         onKeyDown={(e) => handleSubmit(e)}
       />
-      {user ? (<span> Show your pokedex <Switch
-        checked={show}
-        onChange={handleChange}
-        color="primary"
-        name="checkedB"
-        inputProps={{ 'aria-label': 'primary checkbox' }}
-      /></span>) : (null)}
-      <InputLabel id="sortingLabel">Sort</InputLabel>
-      <Select
-        value={orderby}
-        onChange={handleOrder}
-        className={classes.sortSelect}
-        autoWidth
-        labelId="sortingLabel"
-      >
-        <MenuItem value={"pokemonID"}>Id</MenuItem>
-        <MenuItem value={"name"}>Name</MenuItem>
-        <MenuItem value={"base_experience"}>Experience</MenuItem>
-        <MenuItem value={"weight"}>Weight</MenuItem>
-        <MenuItem value={"height"}>Height</MenuItem>
-      </Select>
-    </div>
+      <FormControl variant="filled" className={classes.sortSelect}>
+        <InputLabel id="sortingLabel">Sort</InputLabel>
+        <Select
+          value={orderby}
+          onChange={handleOrder}
+          autoWidth
+          labelId="sortingLabel"
+        >
+          <MenuItem value={"pokemonID"}>Id</MenuItem>
+          <MenuItem value={"name"}>Name</MenuItem>
+          <MenuItem value={"base_experience"}>Experience</MenuItem>
+          <MenuItem value={"weight"}>Weight</MenuItem>
+          <MenuItem value={"height"}>Height</MenuItem>
+        </Select>
+      </FormControl>
+    </div >
   )
 }
 
