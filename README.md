@@ -111,14 +111,11 @@ The app is responsive in a way that ensures the number of pokémon presented is 
 
 ### Testing
 
-#### Cypress
-((Fill in here))
-
-#### End-to-end
+#### End-to-end (Cypress)
 ((Fill in here))
 
 #### Jest (Unit testing)
-((Fill in here))
+We used Jest and React Testing library for our unit tests. React testing library lets ut test the individual react components. We have a number of unit tests that checks if the website has the correct textual output in a lot of cases, and if the site displays the loading screens before something is loaded. We also have tests on if the searchbar works correctly, and some more complicated tests that checks the register/login feature.
 
 ## File Structure
 
