@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import SideBar from '../../sidebar/SideBar';
+import PokemonDialog from '../../../body/Pokemon/PokemonDialog';
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
-import ReduxState from '../../helperClasses/state';
+import ReduxState from '../../../helperClasses/state';
 import { ApolloClient, ApolloProvider } from '@apollo/client';
-import { cache } from "../../cache/realstyleCache";
+import { cache } from "../../../cache/realstyleCache";
 
-describe("SideBar component", () => {
+describe("Check loading pokemondialog", () => {
     const initialState = new ReduxState();
     const mockStore = configureStore()
     let store: any;
@@ -22,30 +22,16 @@ describe("SideBar component", () => {
         
     })
 
-    it("Category 1 exists", () => {
+    it("Check if loading... appears", () => {
         const { getByText } = render(
             <ApolloProvider client={client}>
                 <Provider store={store}>
-                    <SideBar />
+                    <PokemonDialog />
                 </Provider>
             </ApolloProvider>
             );
-        const linkElement = getByText(/Generation 1/i);
+        const linkElement = getByText(/Loading.../i);
         expect(linkElement).toBeInTheDocument();
 
     })
-
-    it("Categories exists", () => {
-        const { getByText } = render(
-            <ApolloProvider client={client}>
-                <Provider store={store}>
-                    <SideBar />
-                </Provider>
-            </ApolloProvider>
-            );
-        const linkElement = getByText(/All Generations/i);
-        expect(linkElement).toBeInTheDocument();
-
-    })
-
 })

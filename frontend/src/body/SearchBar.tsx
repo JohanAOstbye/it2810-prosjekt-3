@@ -60,6 +60,7 @@ const SearchBar = () => {
   return (
     <div className={classes.container}>
       <input
+        data-testid = "searchbar"
         type="name"
         placeholder="Search Pokébase..."
         autoFocus
