@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import PokemonList from '../../../body/Pokemon/PokemonList';
+import PokemonDialog from '../../../src/body/Pokemon/PokemonDialog';
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
-import ReduxState from '../../../helperClasses/state';
+import ReduxState from '../../../src/helperClasses/state';
 import { ApolloClient, ApolloProvider } from '@apollo/client';
-import { cache } from "../../../cache/realstyleCache";
+import { cache } from "../../../src/cache/realstyleCache";
 
-describe("Check if you get the end at the end of list", () => {
+describe("Check loading pokemondialog", () => {
     const initialState = new ReduxState();
     const mockStore = configureStore()
     let store: any;
@@ -22,15 +22,15 @@ describe("Check if you get the end at the end of list", () => {
         
     })
 
-    it("Check if the end:( appears", () => {
+    it("Check if loading... appears", () => {
         const { getByText } = render(
             <ApolloProvider client={client}>
                 <Provider store={store}>
-                    <PokemonList />
+                    <PokemonDialog />
                 </Provider>
             </ApolloProvider>
             );
-        const linkElement = getByText("the end:(");
+        const linkElement = getByText(/Loading.../i);
         expect(linkElement).toBeInTheDocument();
 
     })

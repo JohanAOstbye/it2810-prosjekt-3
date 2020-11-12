@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import SideBar from '../../sidebar/SideBar';
+import SideBar from './../../src/sidebar/SideBar';
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
-import ReduxState from '../../helperClasses/state';
+import ReduxState from './../../src/helperClasses/state';
 import { ApolloClient, ApolloProvider } from '@apollo/client';
-import { cache } from "../../cache/realstyleCache";
+import { cache } from "./../../src/cache/realstyleCache";
 
 describe("SideBar component", () => {
     const initialState = new ReduxState();

@@ -1,13 +1,13 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import PokemonCard from '../../../body/Pokemon/PokemonCard';
+import React, {useState} from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import SearchBar from '../../src/body/SearchBar';
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
-import ReduxState from '../../../helperClasses/state';
+import ReduxState from '../../src/helperClasses/state';
 import { ApolloClient, ApolloProvider } from '@apollo/client';
-import { cache } from "../../../cache/realstyleCache";
+import { cache } from "../../src/cache/realstyleCache";
 
-describe("Check what happens if no props are passed", () => {
+describe("SideBar component", () => {
     const initialState = new ReduxState();
     const mockStore = configureStore()
     let store: any;
@@ -22,17 +22,17 @@ describe("Check what happens if no props are passed", () => {
         
     })
 
-    it("Check if undefined if noe prop is passed", async () => {
+    it("Check if searchbar input works", async () => {
 
         const setup = () => {
             const utils = render(
                 <ApolloProvider client={client}>
                     <Provider store={store}>
-                        <PokemonCard />
+                        <SearchBar />
                     </Provider>
                 </ApolloProvider>
                 );
-            const input = utils.getByTestId('pokemoncard')
+            const input = utils.getByTestId('searchbar')
             return {
               input,
               ...utils,
@@ -40,6 +40,8 @@ describe("Check what happens if no props are passed", () => {
           }
       
         const { input } = setup()
-        expect(input.alt).toBe('Picture of undefined')
+        fireEvent.change(input, { target: { value: 'charizard' } })
+        expect((input as HTMLInputElement).value).toBe('charizard')
       });
+
 })

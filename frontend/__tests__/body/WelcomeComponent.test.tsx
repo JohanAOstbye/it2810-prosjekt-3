@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import WelcomeComponent from '../../body/WelcomeComponent';
+import WelcomeComponent from '../../src/body/WelcomeComponent';
 
 test('renders welcome text', () => {
     const { getByText } = render(<WelcomeComponent />);
