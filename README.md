@@ -48,6 +48,8 @@ Most of us were familiear with REST API, but because of our previous troubles wi
 
 We chose MongoDB because we wanted a noSQL database, aswell as it provides us with tons of documentation and libraries.
 
+After starting the backend docs and sschemas can be found at [graphql default playground](http://localhost:3333/graphql)
+
 #### Queries and API
 Our API is defined with the GraphQL schema in `./backend/schema.qgl`. Here, the queries, mutations and the arguments you can or must pass are defined.
 An example:
@@ -112,10 +114,24 @@ The app is responsive in a way that ensures the number of pokémon presented is 
 ### Testing
 
 #### End-to-end (Cypress)
-((Fill in here))
+We used cypress to test the site across components and mimic a users interaction (EtE).
+We also decided to test the login and register feature here
+
+Cypress testing is done by first: starting the backend and frontend
+Make sure the "noEmit" in tsconfig.json is set to false (this will automatically be set to true by Next.js)
+then:
+```
+$ npm run cypress
+```
+After this the cypress UI will be presented and each integartion can be run by clicking on it
+
+
 
 #### Jest (Unit testing)
-We used Jest and React Testing library for our unit tests. React testing library lets ut test the individual react components. We have a number of unit tests that checks if the website has the correct textual output in a lot of cases, and if the site displays the loading screens before something is loaded. We also have tests on if the searchbar works correctly, and some more complicated tests that checks the register/login feature.
+We used Jest and React Testing library for our unit tests.
+React testing library lets ut test the individual react components.
+We have a number of unit tests that checks if the website has the correct textual output in a lot of cases, and if the site displays the loading screens before something is loaded.
+We also have tests on if the searchbar works correctly, and some more tests that checks the login feature.
 
 ## File Structure
 
