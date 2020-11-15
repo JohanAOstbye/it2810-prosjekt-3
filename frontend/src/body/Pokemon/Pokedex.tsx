@@ -8,9 +8,10 @@ import Filter from "../../helperClasses/filter";
 /* Queries */
 
 //Return all pokemon
-const RETURN_POKEMON_BY_SEARCH = gql`
-  query returnAllPokemon($orderby: String!, $after: String, $name: String!, $maxPokemonId: Int!, $minPokemonId: Int!) {
-    returnAllPokemon(
+const RETURN_POKEDEX = gql`
+  query returnPokedex($orderby: String!, $userId: String!, $after: String, $name: String!, $maxPokemonId: Int!, $minPokemonId: Int!) {
+    returnPokedex(
+      userId: $userId
       orderby: $orderby
       filter: { name: $name, maxPokemonId:$maxPokemonId, minPokemonId:$minPokemonId }
       data: { first: 20, after: $after }
@@ -35,13 +36,15 @@ const RETURN_POKEMON_BY_SEARCH = gql`
 `;
 
 // Container which returns PokemonCards
-function PokemonPageination() {
+function Pokedex(props:any) {
   const filter: Filter = useSelector((state:ReduxState) => state.filter)
+  const show = useSelector((state:ReduxState) => state.pokedex.show)
   
   const { data, loading, fetchMore, error ,refetch} = useQuery(
-    RETURN_POKEMON_BY_SEARCH,
+    RETURN_POKEDEX,
     {
       variables: {
+        userId: props.id,
         name:filter.name,
         maxPokemonId: filter.pokemonId.lte,
         minPokemonId: filter.pokemonId.gte,
@@ -52,8 +55,7 @@ function PokemonPageination() {
 
   useEffect(() => {
     refetch()
-    console.log("refetching with new filter: ", filter)
-  }, [filter, refetch])
+  }, [filter, refetch, show])
 
   if (loading) return <p>Loading</p>;
 
@@ -63,21 +65,21 @@ function PokemonPageination() {
     <div>
       <PokemonList
         loading={loading}
-        entries={data.returnAllPokemon.edges.map((edge: { node: any; }) => edge.node)}
+        entries={data.returnPokedex.edges.map((edge: { node: any; }) => edge.node)}
         onLoadMore={() => {
           fetchMore(
             {
               variables: {
-                after: data.returnAllPokemon.pageInfo.endCursor,
+                after: data.returnPokedex.pageInfo.endCursor,
               }
             });
         }}
         error={error}
-        end={data.returnAllPokemon.pageInfo.hasNextPage}
-        extraKey="pokemons"
+        end={data.returnPokedex.pageInfo.hasNextPage}
+        extraKey="pokedex"
       ></PokemonList>
     </div>
   );
 }
 
-export default PokemonPageination;
+export default Pokedex;

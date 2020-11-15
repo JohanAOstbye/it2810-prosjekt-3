@@ -16,10 +16,12 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react"
   },
   "include": [
-    "src"
+    "src",
+    "src/__tests__",
+    "__tests__"
   ]
 }

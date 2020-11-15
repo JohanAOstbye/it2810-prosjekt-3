@@ -9,7 +9,7 @@ import {
   withStyles,
   makeStyles,
 } from "@material-ui/core/styles";
-import DenseTable from "../DenseTable";
+import DenseTable from "./DenseTable";
 import { useSelector } from "react-redux";
 import ReduxState from "../../helperClasses/state";
 import { Button } from "@material-ui/core";
@@ -175,6 +175,8 @@ function PokemonDialog(props: any) {
         {user ? (
           added ? (null): (
           <Button
+              className="addPokemon"
+              data-testid = "button"
               size="large"
               onClick={handleAdd}
               fullWidth>

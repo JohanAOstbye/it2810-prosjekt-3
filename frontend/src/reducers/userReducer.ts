@@ -6,6 +6,7 @@ const initialUser: User | null = null;
 export default function userReducer(state = initialUser, action: any) {
   switch (action.type) {
     case AUTH_USER:
+      if(action.payload == null) return null;
       return {
         ...state,
         username: action.payload.username,

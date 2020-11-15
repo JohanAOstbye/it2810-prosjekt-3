@@ -14,7 +14,7 @@ import ConnectionArgs from "../utils/ConnectionArgs";
 import * as Relay from "graphql-relay";
 
 class Filter {
-  pokemonId?: { $lte?: number, $gte?: number};
+  pokemonID?: { $lte?: number, $gte?: number};
   weight?: { $lte?: number, $gte?: number};
   height?: { $lte?: number, $gte?: number};
 }
@@ -51,12 +51,12 @@ export class PokemonResolver {
     let filter: Filter = {};
     // setting filter for id
     if (maxPokemonId || minPokemonId) {
-      filter.pokemonId = {};
+      filter.pokemonID = {};
       if (maxPokemonId) {
-        filter.pokemonId.$lte = maxPokemonId
+        filter.pokemonID.$lte = maxPokemonId
       }
       if (minPokemonId) {
-        filter.pokemonId.$gte = minPokemonId
+        filter.pokemonID.$gte = minPokemonId
       }
     }
     // setting filter for wheight
