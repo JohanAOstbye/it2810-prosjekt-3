@@ -85,7 +85,7 @@ export class Pokemon {
   ) {
     this.pokemonID = pokemonID;
     this.name = name;
-    this.image = `https://pokeres.bastionbot.org/images/pokemon/${pokemonID}.png`;
+    this.image = `https://cdn.traction.one/pokedex/pokemon/${pokemonID}.png`;
     this.base_experience = base_experience;
     this.height = height;
     this.weight = weight;
@@ -116,7 +116,7 @@ export class PokemonInput extends Pokemon {
     super(pokemonID, name, base_experience, height, weight, moves, types);
     this.pokemonID = pokemonID;
     this.name = name;
-    this.image = `https://pokeres.bastionbot.org/images/pokemon/${pokemonID}.png`;
+    this.image = `https://cdn.traction.one/pokedex/pokemon/${pokemonID}.png`;
     this.base_experience = base_experience;
     this.height = height;
     this.weight = weight;

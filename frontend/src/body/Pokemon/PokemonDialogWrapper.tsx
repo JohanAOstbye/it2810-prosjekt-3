@@ -1,5 +1,5 @@
-import Dialog from "@material-ui/core/Dialog";
-import { makeStyles } from "@material-ui/core";
+import Dialog from "@mui/material/Dialog";
+import { makeStyles } from "@mui/styles";
 import React from "react";
 import PokemonCard from "./PokemonCard";
 import PokemonDialog from "./PokemonDialog";

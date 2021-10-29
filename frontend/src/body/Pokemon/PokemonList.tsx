@@ -1,13 +1,20 @@
 import React, { useEffect } from "react";
-import {
-  makeStyles,
-} from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import PokemonDialogWrapper from "./PokemonDialogWrapper";
+import { CircularProgress } from "@mui/material";
 
 /* Styles */
 
 //Styles for PokemonCard and PokemonContainer
 const useStyles = makeStyles(() => ({
+  content: {
+    margin: "0.5rem",
+    display: "flex",
+    flexDirection: "column",
+    alignContent: "center",
+    alignItems: "stretch",
+    flexGrow: 1,
+  },
   pokemonContainer: {
     display: "flex",
     flexDirection: "row",
@@ -34,7 +41,7 @@ function PokemonList(props: any) {
   });
 
   if (props.error) return <p>Error ${props.error.message}</p>;
-  if (props.loading && !props.entries) return <p>Loading...</p>;
+  if (props.loading && !props.entries) return <p><br/><CircularProgress /></p>;
   const pokemon = props.entries || []
 
   const handleOnScroll = () => {
@@ -48,6 +55,7 @@ function PokemonList(props: any) {
       document.documentElement.clientHeight || window.innerHeight;
     var scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
     if (scrolledToBottom) {
+      console.log("loading");
       props.onLoadMore();
     }
   };
@@ -63,8 +71,8 @@ function PokemonList(props: any) {
           image={pokemon.image}
         />
       ))}
-      {props.loading ? (<h2>Loading...</h2>) : (null)}
-      {props.end ? (null) : (<p>the end:(</p>)}
+      {props.loading ? (<h2 className={classes.content} ><br/><CircularProgress /></h2>) : (null)}
+      {props.end ? (null) : (<p className={classes.content} ><br/><CircularProgress /></p>)}
     </div>
   );
 }

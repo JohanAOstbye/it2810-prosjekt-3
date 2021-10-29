@@ -4,6 +4,19 @@ import PokemonList from "./PokemonList";
 import { useSelector } from "react-redux";
 import ReduxState from "../../helperClasses/state";
 import Filter from "../../helperClasses/filter";
+import { CircularProgress } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles(() => ({
+  content: {
+    margin: "0.5rem",
+    display: "flex",
+    flexDirection: "column",
+    alignContent: "center",
+    alignItems: "stretch",
+    flexGrow: 1,
+  },
+}));
 
 /* Queries */
 
@@ -36,6 +49,7 @@ const RETURN_POKEMON_BY_SEARCH = gql`
 
 // Container which returns PokemonCards
 function PokemonPageination() {
+  const classes = useStyles()
   const filter: Filter = useSelector((state:ReduxState) => state.filter)
   
   const { data, loading, fetchMore, error ,refetch} = useQuery(
@@ -55,7 +69,7 @@ function PokemonPageination() {
     console.log("refetching with new filter: ", filter)
   }, [filter, refetch])
 
-  if (loading) return <p>Loading</p>;
+  if (loading) return <p className={classes.content} ><br/><CircularProgress/></p>;
 
   if (data === undefined) return <p>graphql is not working</p>;
 

@@ -92,10 +92,10 @@ There are numerous more, however this is the one used most frequently when fetch
 A tech-stack with
 - React, initialized with `create-react-app`, implemented in Typescript. 
 - Redux
-- Material-UI
+- MUI
 - ApolloClient
 
-We chose to use Material-UI for their intuitive to understand and well-documented libraries of components, and are very happy with our choice.
+We chose to use MUI for their intuitive to understand and well-documented libraries of components, and are very happy with our choice.
 
 We chose Redux over MobX mostly because our group wanted to learn it, because it is used professionally by a lot of companies.
 

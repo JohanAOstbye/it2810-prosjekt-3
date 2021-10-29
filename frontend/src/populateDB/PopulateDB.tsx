@@ -2,7 +2,7 @@ import React from 'react';
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { PokemonInput, stat, IapiPokemon, pokemonReducer } from "./pokemonReducer"
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 
 class Stat implements stat {
     constructor(
@@ -58,7 +58,7 @@ function PopulateDB() {
 
     return (
         <div>
-            <Button size="large" color="default" onClick={() => fetchPokemons()}>Update DB</Button>
+            <Button size="large" color="primary" onClick={() => fetchPokemons()}>Update DB</Button>
         </div>
     );
 }

@@ -2,7 +2,8 @@ import Filter from './../helperClasses/filter'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ReduxState from '../helperClasses/state'
-import { FormControl, InputLabel, makeStyles, MenuItem, Select, Switch } from '@material-ui/core'
+import { FormControl, InputLabel, MenuItem, Select, Switch, TextField } from '@mui/material'
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   container: {
@@ -62,9 +63,9 @@ const SearchBar = () => {
     dispatch({ type: 'SHOW_POKEDEX', payload: { show: show } });
   }, [show])
 
-  const handleOrder = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setOrderby(event.target.value as string)
-  }
+  const handleOrder = (event: { target: { value: React.SetStateAction<string> } }) => {
+    setOrderby(event.target.value);
+  };
 
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +80,7 @@ const SearchBar = () => {
         name="checkedB"
         inputProps={{ 'aria-label': 'primary checkbox' }}
       /> Show your pokedex </span>) : (<div className={classes.pokedex}/>)}
-      <input
+      <TextField
         className={classes.search}
         data-testid = "searchbar"
         type="name"

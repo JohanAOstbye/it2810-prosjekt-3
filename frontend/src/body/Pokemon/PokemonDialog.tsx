@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import MuiDialogContent from "@material-ui/core/DialogContent";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
+import MuiDialogTitle from "@mui/material/DialogTitle";
+import MuiDialogContent from "@mui/material/DialogContent";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
 import { gql, useLazyQuery, useMutation} from "@apollo/client";
 import theme from "../../theme";
 import {
   withStyles,
   makeStyles,
-} from "@material-ui/core/styles";
+} from "@mui/styles";
 import DenseTable from "./DenseTable";
 import { useSelector } from "react-redux";
 import ReduxState from "../../helperClasses/state";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 
 
 /* Styles */

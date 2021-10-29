@@ -6,14 +6,14 @@ import {
   ApolloClient,
   ApolloProvider,
 } from "@apollo/client";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "@mui/styles";
 import { Provider} from "react-redux";
 import { cache } from "./cache/realstyleCache";
 import store from "./store"
 
 /* Styles */
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
   app: {
     minHeight: "100vh",
     backgroundColor: "teal",
@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
     flexDirection: "row",
     flexGrow: 1,
   }
-}));
+});
 
 const client = new ApolloClient({
   uri: "http://localhost:3333/graphql", 

@@ -1,7 +1,7 @@
 import React from "react";
 import PokemonPageination from "./Pokemon/PokemonPageination";
 import WelcomeComponent from "./WelcomeComponent";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@mui/styles";
 import SearchBar from "./SearchBar";
 import ReduxState from "../helperClasses/state";
 import { useSelector } from "react-redux";

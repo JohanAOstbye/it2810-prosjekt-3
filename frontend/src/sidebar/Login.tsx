@@ -1,15 +1,16 @@
 import { gql, useLazyQuery, useMutation } from '@apollo/client'
-import { Button, makeStyles, TextField, Typography } from '@material-ui/core'
+import { Button, TextField, Typography } from '@mui/material'
+import { makeStyles } from "@mui/styles";
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import User from '../helperClasses/user'
 
 /* Styles */
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
     typographyStyles: {
         color: 'white',
     },
-}))
+});
 
 /* Helperclass */
 class InputUser {

@@ -1,6 +1,6 @@
 import React from "react";
-import { AppBar, Button, Divider, List, Toolbar, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { AppBar, Button, Divider, List, Toolbar, Typography } from '@mui/material';
+import { makeStyles } from "@mui/styles";
 import Login from "./Login";
 import { useDispatch, useSelector } from "react-redux";
 import ReduxState from "../helperClasses/state";
